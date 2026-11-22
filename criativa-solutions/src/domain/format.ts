@@ -29,20 +29,18 @@ export function parsePct(s: string): number {
 
 /** pt-BR decimal input → number; NaN when invalid. */
 export function parseNum(s: string): number {
-  const t = s.trim().replace(/\./g, (m, i, all) => (all.includes(",") ? "" : m)).replace(",", ".");
+  const raw = s.trim();
+  const t = (raw.includes(",") ? raw.replace(/\./g, "") : raw).replace(",", ".");
   return t === "" ? NaN : Number(t);
 }
 
 export const uid = () =>
   (globalThis.crypto?.randomUUID?.() ?? Math.random().toString(36).slice(2) + Date.now().toString(36)).replace(/-/g, "").slice(0, 16);
 
-export const initials = (name: string) =>
-  name
-    .split(/\s+/)
-    .filter((w) => w.length > 2 || /^[A-Z]/.test(w))
-    .slice(0, 2)
-    .map((w) => w[0]!.toUpperCase())
-    .join("") || name.slice(0, 2).toUpperCase();
+export const initials = (name: string) => {
+  const words = name.replace(/\(.*?\)/g, " ").split(/\s+/).map((w) => w.replace(/[^\p{L}\p{N}]/gu, "")).filter((w) => w && !/^(da|das|de|do|dos|e)$/i.test(w));
+  return (words.slice(0, 2).map((w) => w[0]!.toUpperCase()).join("") || name.replace(/[^\p{L}]/gu, "").slice(0, 2).toUpperCase());
+};
 
 export const proposalFileName = (number: number, revision: number) =>
   `proposta-${String(number).padStart(4, "0")}-r${revision}.pdf`;

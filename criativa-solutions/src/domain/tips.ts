@@ -51,7 +51,7 @@ export function quoteTips(q: Quote, calc: QuoteCalc, items: CatalogItem[], suppl
     tips.push({ level: "dica", text: "Peça externa: considere vedação (silicone ou selante PU) e fixadores resistentes à corrosão." });
   if (q.installAddress && !q.lines.some((l) => /instala/i.test(l.description) || /instala/i.test(l.deliverable)))
     tips.push({ level: "aviso", text: "Há endereço de instalação, mas nenhum item de instalação ou deslocamento." });
-  if (q.lines.some((l) => /altura|andaime|plataforma/i.test(q.measures + q.scope)) && !has(q, it, /andaime|plataforma/i))
+  if (/altura|andaime|plataforma/i.test(`${q.measures} ${q.scope}`) && !has(q, it, /andaime|plataforma/i))
     tips.push({ level: "dica", text: "O escopo cita altura: avalie andaime ou plataforma elevatória." });
 
   if (has(q, it, /acr[ií]lico/i)) {

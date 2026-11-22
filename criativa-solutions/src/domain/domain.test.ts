@@ -179,3 +179,12 @@ describe("contatos e CSV", () => {
   });
   it("lê moeda brasileira", () => expect(parseMoney("R$ 1.000,00")).toBe(100000));
 });
+
+import { initials } from "./format";
+describe("iniciais", () => {
+  it("ignora parênteses e conectivos", () => {
+    expect(initials("Fattu (filial Rio)")).toBe("F");
+    expect(initials("Dacril Multicor")).toBe("DM");
+    expect(initials("Casa das Letras")).toBe("CL");
+  });
+});

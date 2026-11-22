@@ -1,13 +1,885 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Criativa Solutions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: split hero with a live proposal mock → bento of colour blocks → model cards → 6-step flow → margin calculator → suppliers → dark CTA band → footer. One brand look (Criativa palette), set explicitly for both host themes. */
+:root {
+  --roxo: #7F3D9F;
+  --roxo-700: #64307E;
+  --roxo-50: #F4EEF7;
+  --magenta: #EF0075;
+  --magenta-50: #FDEBF3;
+  --tinta: #212121;
+  --branco: #FFFFFF;
+  --gelo: #F9F9F9;
+  --linha: #ECE7EF;
+  --suave: #67606D;
+  --ok: #1F8A5B;
+  --display: "Bricolage Grotesque", "Manrope", system-ui, sans-serif;
+  --body: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --r-xl: 32px; --r-lg: 24px; --r-md: 16px; --r-sm: 12px;
+  --sombra-alta: 0 2px 4px rgba(33,33,33,.04), 0 30px 60px -20px rgba(54,22,70,.35);
+  color-scheme: light;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--gelo); color: var(--tinta); font: 500 16px/1.6 var(--body); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { font-family: var(--display); font-weight: 800; line-height: 1.02; letter-spacing: -0.025em; margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+a { color: inherit; }
+img { display: block; }
+main, footer { overflow-x: clip; }
+.wrap { max-width: 1200px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.num { font-variant-numeric: tabular-nums; }
+#landing :focus-visible { outline: 3px solid var(--magenta); outline-offset: 3px; border-radius: 8px; }
+
+.chip { display: inline-flex; align-items: center; gap: 8px; font: 700 12px/1 var(--body); letter-spacing: .04em; padding: 8px 12px 8px 10px; border-radius: 999px; background: var(--branco); border: 1px solid var(--linha); color: var(--roxo); }
+.chip i { width: 8px; height: 8px; border-radius: 50%; background: var(--magenta); box-shadow: 0 0 0 4px var(--magenta-50); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 26px; border-radius: 999px; font: 800 15px/1 var(--body); text-decoration: none; border: 1.5px solid transparent; cursor: pointer; transition: transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .2s, background .2s, color .2s, border-color .2s; white-space: nowrap; }
+.btn svg { width: 18px; height: 18px; transition: transform .2s; }
+.btn:hover svg { transform: translateX(3px); }
+.btn-roxo { background: var(--roxo); color: var(--branco); box-shadow: 0 10px 24px -10px rgba(127,61,159,.7); }
+.btn-roxo:hover { background: var(--roxo-700); transform: translateY(-1px); }
+.btn-linha { border-color: var(--linha); background: var(--branco); color: var(--tinta); }
+.btn-linha:hover { border-color: var(--tinta); }
+.btn-magenta { background: var(--magenta); color: var(--branco); }
+.btn-magenta:hover { transform: translateY(-1px); box-shadow: 0 14px 28px -12px rgba(239,0,117,.8); }
+
+/* ── Header ── */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; padding-top: 14px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--gelo); }
+.barra { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 64px; padding: 0 8px 0 22px; background: rgba(255,255,255,.86); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); border: 1px solid rgba(236,231,239,.9); border-radius: 999px; box-shadow: 0 8px 30px -18px rgba(54,22,70,.4); }
+.barra img { height: 22px; width: auto; }
+.barra nav { display: flex; gap: 4px; }
+.barra nav a { text-decoration: none; font-weight: 600; font-size: 14px; color: var(--suave); padding: 8px 14px; border-radius: 999px; transition: background .2s, color .2s; }
+.barra nav a:hover { background: var(--roxo-50); color: var(--roxo); }
+.barra .btn { height: 46px; padding: 0 20px; font-size: 14px; }
+@media (max-width: 900px) { .barra nav { display: none; } }
+
+/* ── Hero ── */
+.hero { padding-block: 56px 40px; }
+.hero-grid { display: grid; grid-template-columns: 1.02fr 1fr; gap: 48px; align-items: center; }
+.hero h1 { font-size: clamp(40px, 6vw, 74px); margin-top: 22px; }
+.hero h1 .destaque { color: var(--roxo); position: relative; white-space: nowrap; }
+.hero h1 .destaque::after { content: ""; position: absolute; left: 0; right: 0; bottom: .02em; height: .12em; background: var(--magenta); border-radius: 99px; transform-origin: left; animation: risco 1s .3s cubic-bezier(.2,.8,.2,1) both; z-index: -1; }
+@keyframes risco { from { transform: scaleX(.15); } to { transform: scaleX(1); } }
+.hero .lead { font-size: 18px; color: var(--suave); margin-top: 22px; max-width: 34em; }
+.hero .acoes { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+.provas { display: flex; gap: 40px; flex-wrap: wrap; margin-top: 44px; padding-top: 28px; border-top: 1px solid var(--linha); }
+.prova b { display: block; font: 800 30px/1 var(--display); letter-spacing: -.02em; }
+.prova span { font-size: 13px; color: var(--suave); }
+
+/* Product mock */
+.mock { position: relative; min-height: 600px; }
+.mock .bloco { position: absolute; inset: 40px 0 0 56px; border-radius: 40px; background: var(--roxo); overflow: hidden; }
+.mock .bloco::before { content: ""; position: absolute; width: 360px; height: 360px; right: -120px; top: -130px; border-radius: 50%; background: radial-gradient(circle, rgba(239,0,117,.85), rgba(239,0,117,0) 70%); }
+.mock .bloco::after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.16) 1px, transparent 1.5px); background-size: 22px 22px; -webkit-mask-image: linear-gradient(160deg, #000 10%, transparent 70%); mask-image: linear-gradient(160deg, #000 10%, transparent 70%); }
+.proposta { position: absolute; left: 0; top: 0; width: min(410px, 82%); background: var(--branco); border-radius: var(--r-lg); box-shadow: var(--sombra-alta); padding: 22px; animation: sobe .9s .1s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes sobe { from { transform: translateY(18px); } to { transform: none; } }
+.proposta header { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+.rot { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--suave); }
+.proposta h3 { font: 700 18px/1.25 var(--display); letter-spacing: -.01em; margin-top: 6px; }
+.status { font: 800 11px/1 var(--body); padding: 6px 10px; border-radius: 999px; background: var(--roxo-50); color: var(--roxo); white-space: nowrap; }
+.linhas { margin-top: 16px; }
+.linha { display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: center; padding: 11px 0; border-top: 1px solid var(--linha); font-size: 14px; font-weight: 700; }
+.linha .ic { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--roxo-50); color: var(--roxo); }
+.linha .ic svg { width: 18px; height: 18px; }
+.linha small { display: block; color: var(--suave); font-size: 12px; font-weight: 500; }
+.linha b { font-weight: 800; }
+.total { margin-top: 8px; padding: 16px; border-radius: var(--r-md); background: var(--tinta); color: var(--branco); display: flex; justify-content: space-between; align-items: end; gap: 12px; }
+.total .v { font: 800 28px/1 var(--display); letter-spacing: -.02em; white-space: nowrap; }
+.total small { color: rgba(255,255,255,.65); font-size: 12px; display: block; margin-bottom: 6px; }
+.margem { font: 800 12px/1 var(--body); padding: 7px 10px; border-radius: 999px; background: rgba(255,255,255,.12); color: var(--branco); white-space: nowrap; }
+.flutua { position: absolute; background: var(--branco); border-radius: var(--r-md); box-shadow: var(--sombra-alta); padding: 14px 16px; display: flex; gap: 12px; align-items: start; font-size: 13px; line-height: 1.45; }
+.flutua .ic { width: 32px; height: 32px; flex: none; border-radius: 10px; display: grid; place-items: center; }
+.flutua .ic svg { width: 17px; height: 17px; }
+.dica { right: 0; top: 420px; width: 280px; animation: sobe .9s .35s cubic-bezier(.2,.8,.2,1) both; }
+.dica .ic { background: var(--magenta-50); color: var(--magenta); }
+.dica b { display: block; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--magenta); margin-bottom: 2px; }
+.pdf { left: 96px; bottom: 26px; animation: sobe .9s .55s cubic-bezier(.2,.8,.2,1) both; align-items: center; }
+.pdf .ic { background: #E8F5EE; color: var(--ok); }
+.pdf small { display: block; color: var(--suave); font-size: 12px; }
+.estrela { position: absolute; right: 40px; top: 4px; width: 64px; height: 64px; background: var(--magenta); clip-path: polygon(50% 0, 60% 38%, 100% 50%, 60% 62%, 50% 100%, 40% 62%, 0 50%, 40% 38%); animation: gira 14s linear infinite; }
+@keyframes gira { to { transform: rotate(360deg); } }
+@media (max-width: 980px) { .hero-grid { grid-template-columns: 1fr; } .mock { min-height: 600px; width: 100%; max-width: 560px; } }
+@media (max-width: 560px) {
+  .hero { padding-top: 36px; }
+  .provas { gap: 28px; }
+  .mock { min-height: 0; display: grid; gap: 12px; padding: 0 12px 20px; }
+  .mock .bloco { inset: 90px 0 0 0; border-radius: 32px; }
+  .proposta, .flutua { position: relative; inset: auto; width: auto; left: auto; right: auto; top: auto; bottom: auto; }
+  .proposta { margin: 0 -12px; }
+  .total .v { font-size: 24px; }
+  .estrela { display: none; }
+}
+
+/* ── Sections ── */
+.sec { padding-block: 88px; }
+.cab { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: end; margin-bottom: 40px; }
+.cab h2 { font-size: clamp(32px, 4.4vw, 56px); }
+.cab p { color: var(--suave); font-size: 17px; max-width: 30em; justify-self: end; }
+.olho { display: inline-block; font: 800 12px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--magenta); margin-bottom: 16px; }
+@media (max-width: 820px) { .sec { padding-block: 64px; } .cab { grid-template-columns: 1fr; gap: 16px; } .cab p { justify-self: start; } }
+
+/* ── Bento ── */
+.bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+.cel { border-radius: var(--r-xl); padding: 30px; min-height: 260px; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; position: relative; overflow: hidden; min-width: 0; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+.cel:hover { transform: translateY(-4px); }
+.cel h3 { font-size: clamp(24px, 2.4vw, 32px); }
+.cel p { font-size: 15px; }
+.cel .tag { align-self: flex-start; font: 800 11px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; padding: 8px 12px; border-radius: 999px; }
+.c1 { grid-column: span 7; background: var(--roxo); color: var(--branco); }
+.c1 p { color: rgba(255,255,255,.8); max-width: 30em; }
+.c1 .tag { background: rgba(255,255,255,.14); }
+.c2 { grid-column: span 5; background: var(--branco); border: 1px solid var(--linha); }
+.c2 p { color: var(--suave); }
+.c2 .tag { background: var(--roxo-50); color: var(--roxo); }
+.c3 { grid-column: span 4; background: var(--magenta); color: var(--branco); }
+.c3 p { color: rgba(255,255,255,.9); }
+.c3 .tag { background: rgba(255,255,255,.18); }
+.c4 { grid-column: span 4; background: var(--tinta); color: var(--branco); }
+.c4 p { color: rgba(255,255,255,.72); }
+.c4 .tag { background: rgba(255,255,255,.1); }
+.c5 { grid-column: span 4; background: var(--roxo-50); }
+.c5 p { color: var(--suave); }
+.c5 .tag { background: var(--branco); color: var(--roxo); }
+.mini-tab { display: grid; gap: 8px; font-size: 14px; }
+.mini-tab div { display: flex; justify-content: space-between; gap: 12px; padding: 11px 14px; border-radius: 12px; background: rgba(255,255,255,.1); }
+.mini-tab .forte { background: var(--branco); color: var(--roxo); font-weight: 800; }
+.selos { display: flex; flex-wrap: wrap; gap: 8px; }
+.selos span { font: 700 13px/1 var(--body); padding: 10px 12px; border-radius: 12px; background: var(--gelo); border: 1px solid var(--linha); }
+@media (max-width: 900px) { .c1, .c2, .c5 { grid-column: span 12; } .c3, .c4 { grid-column: span 6; } }
+@media (max-width: 600px) { .c3, .c4 { grid-column: span 12; } .cel { min-height: 0; padding: 26px; } }
+
+/* ── Models ── */
+.modelos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.modelo { background: var(--branco); border: 1px solid var(--linha); border-radius: var(--r-lg); padding: 22px; display: flex; flex-direction: column; gap: 12px; min-width: 0; transition: border-color .25s, box-shadow .25s, transform .25s; }
+.modelo:hover { border-color: transparent; box-shadow: var(--sombra-alta); transform: translateY(-3px); }
+.modelo .ico { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: var(--roxo-50); color: var(--roxo); }
+.modelo .ico svg { width: 24px; height: 24px; }
+.modelo h3 { font-size: 20px; letter-spacing: -.015em; }
+.modelo p { color: var(--suave); font-size: 14px; }
+.modelo .mats { margin-top: auto; padding-top: 14px; border-top: 1px dashed var(--linha); display: flex; flex-wrap: wrap; gap: 6px; }
+.modelo .mats span { font: 700 11px/1 var(--body); padding: 6px 8px; border-radius: 8px; background: var(--gelo); color: var(--suave); }
+.modelo.dest { background: var(--tinta); color: var(--branco); border-color: var(--tinta); }
+.modelo.dest p { color: rgba(255,255,255,.72); }
+.modelo.dest .ico { background: var(--magenta); color: var(--branco); }
+.modelo.dest .mats { border-color: rgba(255,255,255,.16); }
+.modelo.dest .mats span { background: rgba(255,255,255,.08); color: rgba(255,255,255,.85); }
+@media (max-width: 1000px) { .modelos { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .modelos { grid-template-columns: 1fr; } }
+
+/* ── Steps ── */
+.fluxo { background: var(--branco); border: 1px solid var(--linha); border-radius: var(--r-xl); padding: 44px; }
+.passos { list-style: none; margin: 36px 0 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; counter-reset: p; }
+.passos li { counter-increment: p; position: relative; padding: 18px; border-radius: var(--r-md); background: var(--gelo); min-width: 0; }
+.passos li::before { content: counter(p, decimal-leading-zero); display: block; font: 800 13px/1 var(--display); color: var(--magenta); margin-bottom: 18px; }
+.passos li:not(:last-child)::after { content: ""; position: absolute; right: -9px; top: 21px; width: 7px; height: 7px; border-top: 2px solid #CFC6D6; border-right: 2px solid #CFC6D6; transform: rotate(45deg); }
+.passos b { display: block; font: 700 16px/1.2 var(--display); letter-spacing: -.01em; }
+.passos span { display: block; color: var(--suave); font-size: 13px; margin-top: 6px; line-height: 1.45; }
+@media (max-width: 1000px) { .passos { grid-template-columns: repeat(3, 1fr); } .passos li::after { display: none; } }
+@media (max-width: 560px) { .fluxo { padding: 26px; } .passos { grid-template-columns: 1fr 1fr; } }
+
+/* ── Calculator ── */
+.calc { display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px; }
+.calc-in { background: var(--branco); border: 1px solid var(--linha); border-radius: var(--r-xl); padding: 40px; min-width: 0; }
+.calc-in h2 { font-size: clamp(30px, 3.6vw, 44px); }
+.calc-in p { color: var(--suave); margin-top: 14px; }
+.campos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 28px; }
+.campo { min-width: 0; }
+.campo label { display: block; font: 800 12px/1 var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--suave); margin-bottom: 10px; }
+.campo .in { display: flex; align-items: center; height: 56px; border: 1.5px solid var(--linha); border-radius: var(--r-md); padding: 0 16px; background: var(--gelo); transition: border-color .2s, background .2s; }
+.campo .in:focus-within { border-color: var(--roxo); background: var(--branco); }
+.campo .in span { color: var(--suave); font-weight: 700; }
+.campo input { flex: 1; min-width: 0; border: 0; background: transparent; font: 800 20px/1 var(--body); color: var(--tinta); font-variant-numeric: tabular-nums; padding: 0 8px; outline: none; width: 100%; }
+.trilho { margin-top: 20px; }
+.trilho input { width: 100%; accent-color: var(--roxo); }
+.erro { color: var(--magenta); font-size: 13px; font-weight: 700; min-height: 20px; margin-top: 10px; }
+.calc-out { background: var(--roxo); color: var(--branco); border-radius: var(--r-xl); padding: 40px; display: flex; flex-direction: column; justify-content: space-between; gap: 28px; position: relative; overflow: hidden; min-width: 0; }
+.calc-out::after { content: ""; position: absolute; width: 220px; height: 220px; right: -80px; top: -90px; border-radius: 50%; background: var(--magenta); }
+.calc-out > * { position: relative; z-index: 1; }
+.calc-out .rot { color: rgba(255,255,255,.7); }
+.calc-out .preco { font: 800 clamp(46px, 6vw, 72px)/1 var(--display); letter-spacing: -.03em; margin-top: 12px; }
+.calc-out dl { display: grid; grid-template-columns: 1fr auto; gap: 12px 20px; margin: 0; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.2); font-size: 15px; }
+.calc-out dt { color: rgba(255,255,255,.75); }
+.calc-out dd { margin: 0; font-weight: 800; text-align: right; }
+.calc-out .nota { font-size: 13px; color: rgba(255,255,255,.78); max-width: 30em; }
+@media (max-width: 880px) { .calc { grid-template-columns: 1fr; } .calc-in, .calc-out { padding: 28px; } }
+@media (max-width: 420px) { .campos { grid-template-columns: 1fr; } }
+
+/* ── Suppliers ── */
+.forns { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.forn { display: grid; grid-template-columns: 56px 1fr; gap: 14px; align-items: center; background: var(--branco); border: 1px solid var(--linha); border-radius: var(--r-md); padding: 14px; min-width: 0; }
+.forn .lg { width: 56px; height: 56px; border-radius: 14px; background: var(--gelo); display: grid; place-items: center; overflow: hidden; }
+.forn .lg img { max-width: 46px; max-height: 40px; object-fit: contain; }
+.forn .lg.escuro { background: var(--tinta); }
+.forn .lg.ini { background: var(--tinta); color: var(--branco); font: 800 16px/1 var(--display); }
+.forn b { display: block; font-size: 15px; line-height: 1.25; }
+.forn small { color: var(--suave); font-size: 13px; }
+.forn.principal { border-color: var(--magenta); box-shadow: 0 0 0 3px var(--magenta-50); }
+.forn .selo { display: block; margin-top: 4px; font: 800 10px/1 var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--magenta); }
+@media (max-width: 1000px) { .forns { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .forns { grid-template-columns: 1fr; } }
+
+/* ── CTA + footer ── */
+.cta { background: var(--tinta); color: var(--branco); border-radius: 40px; padding: 64px; display: grid; grid-template-columns: 1.3fr auto; gap: 32px; align-items: center; position: relative; overflow: hidden; }
+.cta::before { content: ""; position: absolute; width: 520px; height: 520px; left: -160px; top: -300px; border-radius: 50%; background: radial-gradient(circle, rgba(127,61,159,.85), transparent 65%); }
+.cta::after { content: ""; position: absolute; width: 360px; height: 360px; right: -120px; bottom: -220px; border-radius: 50%; background: radial-gradient(circle, rgba(239,0,117,.7), transparent 65%); }
+.cta > * { position: relative; z-index: 1; }
+.cta h2 { font-size: clamp(32px, 4.4vw, 56px); }
+.cta h2 span { color: #D7A6EE; }
+.cta p { color: rgba(255,255,255,.72); margin-top: 16px; font-size: 17px; max-width: 34em; }
+@media (max-width: 820px) { .cta { grid-template-columns: 1fr; padding: 36px 28px; border-radius: 32px; } }
+footer { padding-block: 24px 48px; }
+.rodape { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 32px; padding-top: 32px; border-top: 1px solid var(--linha); font-size: 14px; color: var(--suave); }
+.rodape img { height: 24px; width: auto; margin-bottom: 14px; }
+.rodape b { display: block; color: var(--tinta); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
+.rodape address { font-style: normal; display: grid; gap: 6px; }
+.rodape a { text-decoration: none; } .rodape a:hover { color: var(--roxo); }
+@media (max-width: 760px) { .rodape { grid-template-columns: 1fr; } }
+
+/* ── Preloader ── */
+.pre { position: fixed; inset: 0; z-index: 100; background: var(--tinta); color: var(--branco); display: none; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); clip-path: inset(0 0 0 0); transition: clip-path .9s cubic-bezier(.77,0,.18,1); }
+.js .pre { display: grid; }
+.pre.sai { clip-path: inset(0 0 100% 0); }
+.pre-in { align-self: center; justify-self: center; width: min(720px, 100%); display: grid; gap: 28px; }
+.pre-marca { display: flex; align-items: center; justify-content: space-between; gap: 16px; overflow: hidden; }
+.pre-marca img { height: clamp(36px, 7vw, 64px); width: auto; filter: invert(1); transform: translateY(110%); animation: preSobe .9s .1s cubic-bezier(.2,.8,.2,1) forwards; }
+.pre-cont { font: 800 clamp(48px, 10vw, 112px)/.9 var(--display); letter-spacing: -.04em; font-variant-numeric: tabular-nums; color: var(--branco); }
+.pre-cont small { font-size: .32em; color: var(--magenta); margin-left: 4px; }
+.pre-linha { height: 3px; background: rgba(255,255,255,.12); border-radius: 3px; overflow: hidden; }
+.pre-linha i { display: block; height: 100%; width: 100%; transform-origin: left; transform: scaleX(var(--p, 0)); background: linear-gradient(90deg, var(--roxo), var(--magenta)); }
+.pre-rodape { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font: 700 12px/1.4 var(--body); letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+.pre-rodape span { overflow: hidden; }
+.pre-rodape b { display: inline-block; transform: translateY(110%); animation: preSobe .8s .35s cubic-bezier(.2,.8,.2,1) forwards; font-weight: 700; }
+@keyframes preSobe { to { transform: none; } }
+
+/* ── Menu button + side drawer ── */
+.menu-btn { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--linha); background: var(--branco); display: grid; place-items: center; cursor: pointer; color: var(--tinta); flex: none; }
+.menu-btn span { display: block; width: 18px; height: 2px; background: currentColor; border-radius: 2px; box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor; }
+.barra-dir { display: flex; align-items: center; gap: 8px; }
+.gaveta-fundo { position: fixed; inset: 0; z-index: 60; background: rgba(33,33,33,.45); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity .4s ease; }
+.gaveta { position: fixed; z-index: 61; top: 0; bottom: 0; left: 0; width: min(420px, 88vw); background: var(--tinta); color: var(--branco); transform: translateX(-102%); transition: transform .6s cubic-bezier(.77,0,.18,1); padding: calc(env(safe-area-inset-top, 0px) + 28px) 32px calc(env(safe-area-inset-bottom, 0px) + 28px) max(32px, env(safe-area-inset-left, 0px)); display: flex; flex-direction: column; gap: 28px; overflow-y: auto; }
+.menu-aberto .gaveta { transform: none; }
+.menu-aberto .gaveta-fundo { opacity: 1; pointer-events: auto; }
+.gaveta-top { display: flex; justify-content: space-between; align-items: center; }
+.gaveta-top img { height: 22px; filter: invert(1); }
+.fechar { width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.2); background: transparent; color: var(--branco); font-size: 22px; line-height: 1; cursor: pointer; }
+.gaveta ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; counter-reset: g; }
+.gaveta li { counter-increment: g; opacity: 0; transform: translateX(-24px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1); }
+.menu-aberto .gaveta li { opacity: 1; transform: none; }
+.menu-aberto .gaveta li:nth-child(2) { transition-delay: .05s; } .menu-aberto .gaveta li:nth-child(3) { transition-delay: .1s; } .menu-aberto .gaveta li:nth-child(4) { transition-delay: .15s; } .menu-aberto .gaveta li:nth-child(5) { transition-delay: .2s; } .menu-aberto .gaveta li:nth-child(6) { transition-delay: .25s; } .menu-aberto .gaveta li:nth-child(7) { transition-delay: .3s; }
+.gaveta li a { display: flex; align-items: baseline; gap: 16px; padding: 10px 0; text-decoration: none; font: 800 clamp(26px, 4vw, 34px)/1.1 var(--display); letter-spacing: -.02em; border-bottom: 1px solid rgba(255,255,255,.08); transition: color .2s, padding .3s; }
+.gaveta li a::before { content: counter(g, decimal-leading-zero); font: 700 12px/1 var(--body); color: var(--magenta); letter-spacing: .1em; }
+.gaveta li a:hover, .gaveta li a.ativo { color: #D7A6EE; padding-left: 8px; }
+.gaveta-pe { margin-top: auto; font-size: 13px; color: rgba(255,255,255,.6); display: grid; gap: 4px; }
+
+/* ── Side rail (desktop) ── */
+.trilha { position: fixed; z-index: 15; left: max(18px, env(safe-area-inset-left, 0px)); top: 50%; transform: translateY(-50%); display: none; flex-direction: column; gap: 14px; padding: 14px 10px; }
+@media (min-width: 1480px) { .trilha { display: flex; } }
+.trilha::before { content: ""; position: absolute; left: 50%; top: 14px; bottom: 14px; width: 2px; margin-left: -1px; background: var(--linha); border-radius: 2px; }
+.trilha::after { content: ""; position: absolute; left: 50%; top: 14px; width: 2px; margin-left: -1px; height: calc((100% - 28px) * var(--prog, 0)); background: var(--magenta); border-radius: 2px; }
+.trilha a { position: relative; z-index: 1; width: 12px; height: 12px; border-radius: 50%; background: var(--gelo); border: 2px solid #CFC6D6; transition: transform .3s, background .3s, border-color .3s; }
+.trilha a span { position: absolute; left: 24px; top: 50%; transform: translate(-6px, -50%); white-space: nowrap; font: 700 12px/1 var(--body); color: var(--tinta); background: var(--branco); border: 1px solid var(--linha); padding: 6px 10px; border-radius: 999px; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
+.trilha a:hover span, .trilha a:focus-visible span { opacity: 1; transform: translate(0, -50%); }
+.trilha a.ativo { background: var(--magenta); border-color: var(--magenta); transform: scale(1.25); }
+.trilha a.passou { border-color: var(--magenta); }
+
+/* ── Reveal in/out ── */
+.js [data-rv] { transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1), filter .9s; transition-delay: var(--d, 0s); }
+.js [data-rv]:not(.in) { opacity: 0; transform: translateY(36px); filter: blur(4px); }
+.js [data-rv="esq"]:not(.in) { transform: translateX(-40px); }
+.js [data-rv="dir"]:not(.in) { transform: translateX(40px); }
+.js [data-rv="zoom"]:not(.in) { transform: scale(.94); }
+.js .linha-txt { display: block; overflow: hidden; }
+.js .linha-txt > span { display: inline-block; transition: transform 1s cubic-bezier(.2,.8,.2,1); transition-delay: var(--d, 0s); }
+.js h1:not(.in) .linha-txt > span, .js h2:not(.in) .linha-txt > span { transform: translateY(105%); }
+
+/* ── Skeleton ── */
+.esqueleto { display: none; }
+.js .esqueleto { display: grid; position: absolute; inset: 0; z-index: 2; background: var(--branco); border-radius: inherit; padding: 22px; gap: 14px; align-content: start; transition: opacity .5s ease, visibility .5s; }
+.pronta .esqueleto { opacity: 0; visibility: hidden; }
+.sk { border-radius: 10px; background: linear-gradient(90deg, #F1EDF4 25%, #FAF8FB 37%, #F1EDF4 63%); background-size: 400% 100%; animation: brilho 1.3s ease infinite; }
+@keyframes brilho { from { background-position: 100% 50%; } to { background-position: 0 50%; } }
+.sk-l { display: grid; grid-template-columns: 34px 1fr 80px; gap: 12px; align-items: center; }
+
+/* ── Marquee ── */
+.faixa { overflow: hidden; padding-block: 28px; border-block: 1px solid var(--linha); background: var(--branco); }
+.faixa-trilho { display: flex; gap: 48px; white-space: nowrap; will-change: transform; transform: translateX(var(--x, 0px)); }
+.faixa-trilho span { font: 800 clamp(40px, 7vw, 96px)/1 var(--display); letter-spacing: -.03em; color: transparent; -webkit-text-stroke: 1.5px #CBB6D6; }
+.faixa-trilho span:nth-child(3n+2) { color: var(--roxo); -webkit-text-stroke: 0; }
+.faixa-trilho span:nth-child(3n) { color: var(--tinta); -webkit-text-stroke: 0; }
+
+/* ── Pinned showcase ── */
+.vitrine { position: relative; height: 520vh; }
+.vitrine-palco { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; align-items: center; overflow: hidden; }
+.vitrine-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: center; }
+.vitrine-grid > * { min-width: 0; }
+.vitrine h2 { font-size: clamp(34px, 4.4vw, 58px); }
+.etapas { list-style: none; margin: 32px 0 0; padding: 0; display: grid; gap: 6px; }
+.etapas li { position: relative; padding: 14px 18px 14px 20px; border-radius: 16px; transition: background .5s, opacity .5s; opacity: .45; cursor: pointer; }
+.etapas li b { display: block; font: 700 18px/1.2 var(--display); letter-spacing: -.01em; }
+.etapas li p { font-size: 14px; color: var(--suave); max-height: 0; overflow: hidden; transition: max-height .6s cubic-bezier(.2,.8,.2,1), margin .6s; }
+.etapas li::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 3px; border-radius: 3px; background: var(--linha); }
+.etapas li::after { content: ""; position: absolute; left: 0; top: 14px; width: 3px; border-radius: 3px; background: var(--magenta); height: calc((100% - 28px) * var(--f, 0)); }
+.etapas li.ativo { opacity: 1; background: var(--branco); box-shadow: 0 10px 30px -20px rgba(54,22,70,.4); }
+.etapas li.ativo p { max-height: 80px; margin-top: 6px; }
+.janela { position: relative; border-radius: 28px; background: var(--tinta); padding: 10px; box-shadow: var(--sombra-alta); aspect-ratio: 4 / 3.3; max-width: 100%; transform: perspective(1400px) rotateY(calc(var(--rot, 0) * 1deg)) rotateX(calc(var(--rotx, 0) * 1deg)); }
+.janela-top { display: flex; align-items: center; gap: 6px; padding: 6px 10px 12px; color: rgba(255,255,255,.6); font: 700 12px/1 var(--body); }
+.janela-top i { width: 10px; height: 10px; border-radius: 50%; background: #444; }
+.janela-top i:first-child { background: var(--magenta); } .janela-top i:nth-child(2) { background: var(--roxo); }
+.janela-top span { margin-left: 10px; }
+.tela { position: absolute; inset: 44px 10px 10px; border-radius: 20px; background: var(--gelo); overflow: hidden; }
+.cena { position: absolute; inset: 0; padding: 22px; display: flex; flex-direction: column; gap: 14px; opacity: 0; transform: translateY(40px) scale(.97); transition: opacity .6s ease, transform .8s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+.cena.saiu { transform: translateY(-40px) scale(.97); }
+.cena.ativa { opacity: 1; transform: none; pointer-events: auto; }
+.cena h4 { margin: 0; font: 800 15px/1.2 var(--display); letter-spacing: -.01em; display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+.cena h4 em { font: 700 11px/1 var(--body); font-style: normal; color: var(--suave); background: var(--branco); border: 1px solid var(--linha); padding: 5px 8px; border-radius: 999px; }
+.form-mini { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.fm { background: var(--branco); border: 1px solid var(--linha); border-radius: 12px; padding: 10px 12px; font-size: 13px; font-weight: 700; min-width: 0; }
+.fm small { display: block; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--suave); margin-bottom: 4px; }
+.fm.largo { grid-column: span 2; }
+.pill-env { display: inline-flex; gap: 4px; background: var(--gelo); border-radius: 999px; padding: 3px; }
+.pill-env span { padding: 3px 10px; border-radius: 999px; font-size: 12px; }
+.pill-env span.on { background: var(--roxo); color: var(--branco); }
+.tab-mini { background: var(--branco); border: 1px solid var(--linha); border-radius: 14px; overflow: hidden; font-size: 12.5px; }
+.tab-mini div { display: grid; grid-template-columns: 1.3fr 1fr auto; gap: 10px; padding: 10px 12px; border-top: 1px solid var(--linha); align-items: center; }
+.tab-mini div:first-child { border-top: 0; font: 800 10px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--suave); background: var(--gelo); }
+.tab-mini b { white-space: nowrap; font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; }
+.forn-tag { font: 700 11px/1 var(--body); color: var(--roxo); background: var(--roxo-50); padding: 5px 7px; border-radius: 7px; justify-self: start; white-space: nowrap; }
+.forn-tag.pri { color: var(--magenta); background: var(--magenta-50); }
+.pend { color: var(--magenta); }
+.chapa-vis { position: relative; flex: 1; min-height: 0; background: var(--branco); border: 1px solid var(--linha); border-radius: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 16px; }
+.chapa { position: relative; border: 2px dashed #CFC6D6; border-radius: 6px; background: repeating-linear-gradient(45deg, #FAF7FB 0 8px, #F4EEF7 8px 16px); }
+.chapa .peca { position: absolute; left: 4%; right: 4%; top: 4%; height: 58%; background: var(--roxo); border-radius: 4px; color: var(--branco); font: 800 11px/1 var(--body); display: grid; place-items: center; transform-origin: top; transform: scaleY(0); transition: transform .8s cubic-bezier(.2,.8,.2,1) .2s; }
+.cena.ativa .chapa .peca { transform: scaleY(1); }
+.chapa small { position: absolute; left: 0; right: 0; bottom: 8px; text-align: center; font-size: 11px; font-weight: 700; color: var(--suave); }
+.metricas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.metricas div { background: var(--branco); border: 1px solid var(--linha); border-radius: 12px; padding: 10px 12px; font-size: 11px; color: var(--suave); font-weight: 700; }
+.metricas b { display: block; font: 800 18px/1.1 var(--display); color: var(--tinta); margin-top: 4px; font-variant-numeric: tabular-nums; }
+.barras-m { display: grid; gap: 10px; background: var(--branco); border: 1px solid var(--linha); border-radius: 14px; padding: 14px; }
+.bm { display: grid; grid-template-columns: 1.2fr 2fr auto; gap: 12px; align-items: center; font-size: 12.5px; font-weight: 700; }
+.bm .tr { height: 10px; border-radius: 10px; background: var(--gelo); overflow: hidden; }
+.bm .tr i { display: block; height: 100%; border-radius: 10px; background: var(--roxo); width: var(--w); transform-origin: left; transform: scaleX(0); transition: transform 1s cubic-bezier(.2,.8,.2,1) .15s; }
+.bm.own .tr i { background: var(--magenta); }
+.cena.ativa .bm .tr i { transform: scaleX(1); }
+.bm b { font-variant-numeric: tabular-nums; }
+.resumo-m { display: flex; justify-content: space-between; align-items: center; gap: 12px; background: var(--tinta); color: var(--branco); border-radius: 14px; padding: 14px 16px; font-size: 12px; }
+.resumo-m b { font: 800 22px/1 var(--display); font-variant-numeric: tabular-nums; display: block; margin-top: 4px; }
+.a4 { flex: 1; min-height: 0; align-self: center; aspect-ratio: 210 / 297; background: var(--branco); border-radius: 6px; box-shadow: 0 20px 40px -20px rgba(54,22,70,.45); padding: 7% 8%; display: flex; flex-direction: column; gap: 6%; font-size: 8px; }
+.a4 img { height: 12px; width: auto; }
+.a4 .lin { height: 5px; border-radius: 3px; background: #EEE; }
+.a4 .tb { display: grid; gap: 4px; }
+.a4 .tb span { display: flex; justify-content: space-between; border-bottom: 1px solid #EEE; padding-bottom: 3px; font-weight: 700; }
+.a4 .tt { margin-top: auto; background: var(--roxo); color: var(--branco); border-radius: 4px; padding: 6px 8px; display: flex; justify-content: space-between; font-weight: 800; }
+.a4 .aceite { border-top: 1px solid #CCC; padding-top: 3px; color: #888; }
+.pdf-pe { display: flex; justify-content: center; gap: 10px; font-size: 12px; font-weight: 800; }
+.pdf-pe span { background: #E8F5EE; color: var(--ok); padding: 6px 10px; border-radius: 999px; }
+.vit-prog { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--linha); }
+.vit-prog i { display: block; height: 100%; width: 100%; transform-origin: left; transform: scaleX(var(--vp, 0)); background: var(--magenta); }
+@media (max-width: 980px) {
+  .vitrine { height: auto; }
+  .vitrine-palco { position: relative; height: auto; padding-block: 72px; }
+  .vitrine-grid { grid-template-columns: 1fr; gap: 28px; }
+  .etapas { display: none; }
+  .janela { aspect-ratio: auto; transform: none; }
+  .tela { position: relative; inset: auto; }
+  .cena { position: relative; opacity: 1; transform: none; pointer-events: auto; border-top: 1px solid var(--linha); min-height: 300px; }
+  .cena:first-child { border-top: 0; }
+  .cena .chapa .peca, .cena .bm .tr i { transform: none; }
+  .vit-prog { display: none; }
+}
+@media (max-width: 520px) { .form-mini { grid-template-columns: 1fr; } .fm.largo { grid-column: auto; } .metricas { grid-template-columns: 1fr 1fr 1fr; } .metricas b { font-size: 15px; } }
+
+/* parallax layers */
+[data-px] { will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+  .js [data-rv]:not(.in) { opacity: 1; transform: none; filter: none; }
+  .js h1:not(.in) .linha-txt > span, .js h2:not(.in) .linha-txt > span { transform: none; }
+  .js .pre { display: none; }
+}
+</style>
+<style>
+html.modo-app #landing { display: none; }
+html:not(.modo-app) #root { display: none; }
+</style>
+<script>if (/^#app/.test(location.hash)) document.documentElement.classList.add("modo-app");</script>
+</head>
+<body>
+
+<script>document.documentElement.classList.add("js");</script>
+
+<div class="pre" id="pre" role="status" aria-label="Carregando Criativa Solutions">
+  <div class="pre-in">
+    <div class="pre-marca"><img src="./logos/criativa.png" alt="Criativa"><div class="pre-cont" id="preCont">0<small>%</small></div></div>
+    <div class="pre-linha"><i id="preLinha"></i></div>
+    <div class="pre-rodape"><span><b>Criativa Grupo · Comunicação visual</b></span><span><b>+1000 projetos · +20 estados · 2 países</b></span></div>
+  </div>
+</div>
+
+<div id="landing">
+<div class="gaveta-fundo" id="gavetaFundo"></div>
+<nav class="gaveta" id="gaveta" aria-label="Menu" aria-hidden="true">
+  <div class="gaveta-top"><img src="./logos/criativa.png" alt="Criativa"><button class="fechar" id="fechar" type="button" aria-label="Fechar menu">×</button></div>
+  <ol>
+    <li><a href="#inicio">Início</a></li>
+    <li><a href="#ferramenta">A ferramenta</a></li>
+    <li><a href="#recursos">Recursos</a></li>
+    <li><a href="#modelos">Modelos</a></li>
+    <li><a href="#fluxo">Como funciona</a></li>
+    <li><a href="#calculadora">Calculadora</a></li>
+    <li><a href="#fornecedores">Fornecedores</a></li>
+  </ol>
+  <div class="gaveta-pe"><span>Rua Guilhermina, 432 · Rio de Janeiro, RJ</span><span>(21) 96490-3804 · contato@criativagrupo.com.br</span></div>
+</nav>
+
+<nav class="trilha" id="trilha" aria-label="Seções da página">
+  <a href="#inicio"><span>Início</span></a>
+  <a href="#ferramenta"><span>A ferramenta</span></a>
+  <a href="#recursos"><span>Recursos</span></a>
+  <a href="#modelos"><span>Modelos</span></a>
+  <a href="#fluxo"><span>Como funciona</span></a>
+  <a href="#calculadora"><span>Calculadora</span></a>
+  <a href="#fornecedores"><span>Fornecedores</span></a>
+  <a href="#app"><span>Abrir o app</span></a>
+</nav>
+
+<div class="top">
+  <div class="wrap">
+    <div class="barra">
+      <a href="#inicio" aria-label="Criativa Solutions, início"><img src="./logos/criativa.png" alt="Criativa"></a>
+      <nav aria-label="Seções">
+        <a href="#recursos">Recursos</a>
+        <a href="#modelos">Modelos</a>
+        <a href="#fluxo">Como funciona</a>
+        <a href="#calculadora">Calculadora</a>
+        <a href="#fornecedores">Fornecedores</a>
+      </nav>
+      <div class="barra-dir"><a class="btn btn-roxo" href="#app">Abrir o app</a><button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="gaveta"><span></span></button></div>
+    </div>
+  </div>
+</div>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="chip" data-rv><i></i>Criativa Solutions · orçamentos internos</span>
+        <h1 data-rv style="--d:.08s">Proposta de comunicação visual com a <span class="destaque">margem certa</span>.</h1>
+        <p class="lead" data-rv style="--d:.16s">Do cliente ao PDF em um fluxo só: materiais e serviços dos fornecedores do Rio, perda e chapa inteira calculadas, margem por item ou meta do projeto e a proposta com a marca da Criativa.</p>
+        <div class="acoes" data-rv style="--d:.24s">
+          <a class="btn btn-roxo" href="#app">Montar um orçamento <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-linha" href="#fluxo">Ver como funciona</a>
+        </div>
+        <div class="provas" data-rv style="--d:.32s">
+          <div class="prova"><b class="num">+1000</b><span>projetos</span></div>
+          <div class="prova"><b class="num">+400</b><span>clientes</span></div>
+          <div class="prova"><b class="num">+20</b><span>estados atendidos</span></div>
+        </div>
+      </div>
+
+      <div class="mock" data-rv="zoom" style="--d:.2s" role="img" aria-label="Exemplo de proposta montada no app, com valores ilustrativos">
+        <div class="bloco" data-px="0.06"></div>
+        <div class="estrela" data-px="-0.18" aria-hidden="true"></div>
+        <article class="proposta" id="proposta">
+          <div class="esqueleto" aria-hidden="true">
+            <div class="sk" style="height:12px;width:45%"></div><div class="sk" style="height:20px;width:80%"></div>
+            <div class="sk-l"><div class="sk" style="height:34px"></div><div class="sk" style="height:14px"></div><div class="sk" style="height:14px"></div></div>
+            <div class="sk-l"><div class="sk" style="height:34px"></div><div class="sk" style="height:14px"></div><div class="sk" style="height:14px"></div></div>
+            <div class="sk-l"><div class="sk" style="height:34px"></div><div class="sk" style="height:14px"></div><div class="sk" style="height:14px"></div></div>
+            <div class="sk" style="height:72px;border-radius:16px"></div>
+          </div>
+          <header>
+            <div><div class="rot">Proposta 0001 · r0 · exemplo</div><h3>Fachada em ACM com letra caixa iluminada</h3></div>
+            <span class="status">Rascunho</span>
+          </header>
+          <div class="linhas">
+            <div class="linha"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="6" width="18" height="10" rx="1"/><path d="M3 20h18"/></svg></span><div>Fachada em ACM<small>ACM, metalon, fixação e vedação</small></div><b class="num">R$ 9.870,00</b></div>
+            <div class="linha"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V6l5 8V6M14 6h6M17 6v12"/></svg></span><div>Letra caixa iluminada<small>Acrílico, módulos LED e fonte</small></div><b class="num">R$ 6.415,00</b></div>
+            <div class="linha"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 7l3-3 3 3-3 3M17 4v9a4 4 0 0 1-4 4H4"/></svg></span><div>Instalação<small>Equipe, deslocamento e andaime</small></div><b class="num">R$ 2.980,00</b></div>
+          </div>
+          <div class="total">
+            <div><small>Total da proposta</small><span class="v num">R$ 19.265,00</span></div>
+            <span class="margem num">margem 38,4%</span>
+          </div>
+        </article>
+        <aside class="flutua dica" data-px="-0.08">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></span>
+          <div><b>Assistente</b>Ambiente externo com LED: use módulos e fonte com proteção IP65 ou superior.</div>
+        </aside>
+        <aside class="flutua pdf" data-px="0.1">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <div><b class="num">proposta-0001-r0.pdf</b><small>A4 pronto para enviar</small></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <div class="faixa" aria-hidden="true"><div class="faixa-trilho" id="faixa"><span>Fachada em ACM</span><span>Letra caixa</span><span>Placas</span><span>Adesivação</span><span>Sinalização</span><span>Displays</span><span>Banners</span><span>Fachada em ACM</span><span>Letra caixa</span><span>Placas</span></div></div>
+
+  <section class="vitrine" id="ferramenta" aria-label="A ferramenta por dentro">
+    <div class="vitrine-palco">
+      <div class="wrap vitrine-grid">
+        <div>
+          <span class="olho">A ferramenta por dentro</span>
+          <h2>Do pedido ao PDF, numa tela só</h2>
+          <ol class="etapas" id="etapas">
+            <li class="ativo"><b>Cliente e projeto</b><p>Contato, endereço de instalação, ambiente e medidas.</p></li>
+            <li><b>Materiais do catálogo</b><p>Ofertas dos fornecedores com fonte, unidade e preço ou “sob cotação”.</p></li>
+            <li><b>Chapa inteira</b><p>Área com perda e plano de corte lado a lado, com a sobra visível.</p></li>
+            <li><b>Margens</b><p>Margem geral, margem própria por linha e resultado em reais.</p></li>
+            <li><b>Proposta em PDF</b><p>A4 com a marca, entregáveis, condições e campo de aceite.</p></li>
+          </ol>
+        </div>
+        <div class="janela" id="janela">
+          <div class="janela-top"><i></i><i></i><i></i><span>Criativa Solutions · Proposta 0001 · exemplo</span></div>
+          <div class="tela">
+            <div class="cena ativa">
+              <h4>Cliente e projeto <em>Etapa 1 de 5</em></h4>
+              <div class="form-mini">
+                <div class="fm"><small>Cliente</small>Padaria Pão Dourado (exemplo)</div>
+                <div class="fm"><small>Contato</small>Marina · compras</div>
+                <div class="fm"><small>Ambiente</small><span class="pill-env"><span>Interno</span><span class="on">Externo</span></span></div>
+                <div class="fm"><small>Medidas</small><span class="num">6,00 × 1,20 m</span></div>
+                <div class="fm largo"><small>Instalação</small>Cachambi, Rio de Janeiro · fachada a 3,5 m de altura</div>
+                <div class="fm largo"><small>Escopo</small>Fachada em ACM com letra caixa iluminada, retirada do letreiro antigo e instalação.</div>
+              </div>
+            </div>
+            <div class="cena">
+              <h4>Materiais e serviços <em>Etapa 2 de 5</em></h4>
+              <div class="tab-mini">
+                <div><span>Item</span><span>Fornecedor</span><b>Custo</b></div>
+                <div><span>ACM 3 mm</span><span class="forn-tag">ViaFlex BR</span><b class="pend">sob cotação</b></div>
+                <div><span>Acrílico leitoso</span><span class="forn-tag pri">Dacril · principal</span><b class="pend">sob cotação</b></div>
+                <div><span>Módulo LED 12 V</span><span class="forn-tag">Rio LED</span><b>R$ 2,09/un</b></div>
+                <div><span>Metalon</span><span class="forn-tag">Castilha</span><b class="pend">sob cotação</b></div>
+                <div><span>Instalação</span><span class="forn-tag">Equipe própria</span><b>R$ 1.900,00</b></div>
+              </div>
+            </div>
+            <div class="cena">
+              <h4>Chapa inteira <em>Etapa 3 de 5</em></h4>
+              <div class="chapa-vis">
+                <div class="chapa"><div class="peca">peça 1,20 × 3,00</div><small>chapa 1,22 × 5,00</small></div>
+                <div class="chapa"><div class="peca">peça 1,20 × 3,00</div><small>chapa 1,22 × 5,00</small></div>
+              </div>
+              <div class="metricas"><div>Área com perda<b>8,28 m²</b></div><div>Chapas pelo plano<b>2</b></div><div>Sobra<b>3,92 m²</b></div></div>
+            </div>
+            <div class="cena">
+              <h4>Margens <em>Etapa 4 de 5</em></h4>
+              <div class="barras-m">
+                <div class="bm"><span>Fachada em ACM</span><span class="tr"><i style="--w:40%"></i></span><b>40%</b></div>
+                <div class="bm own"><span>Letra caixa · própria</span><span class="tr"><i style="--w:42%"></i></span><b>42%</b></div>
+                <div class="bm"><span>Instalação</span><span class="tr"><i style="--w:25.2%"></i></span><b>25,2%</b></div>
+              </div>
+              <div class="resumo-m"><div>Custo<b>R$ 11.870,00</b></div><div>Venda<b>R$ 19.265,00</b></div><div>Margem efetiva<b>38,4%</b></div></div>
+            </div>
+            <div class="cena">
+              <h4>Proposta em PDF <em>Etapa 5 de 5</em></h4>
+              <div class="a4">
+                <img src="./logos/criativa.png" alt="">
+                <div style="display:grid;gap:3px"><div class="lin" style="width:70%"></div><div class="lin" style="width:45%"></div></div>
+                <div class="tb"><span><em style="font-style:normal">Fachada em ACM</em>R$ 9.870,00</span><span><em style="font-style:normal">Letra caixa iluminada</em>R$ 6.415,00</span><span><em style="font-style:normal">Instalação</em>R$ 2.980,00</span></div>
+                <div class="tt"><span>Total</span><span>R$ 19.265,00</span></div>
+                <div class="aceite">Aceite do cliente: ____________________</div>
+              </div>
+              <div class="pdf-pe"><span>proposta-0001-r0.pdf</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="vit-prog"><i id="vitProg"></i></div>
+    </div>
+  </section>
+
+  <section class="sec" id="recursos" style="padding-top:48px">
+    <div class="wrap">
+      <div class="cab">
+        <div data-rv><span class="olho">O que muda no dia a dia</span><h2>Menos planilha, mais proposta aprovada</h2></div>
+        <p data-rv="dir" style="--d:.12s">Cada número da proposta sai da mesma conta: o que aparece na tela é o que vai no PDF e o que fica na revisão interna.</p>
+      </div>
+      <div class="bento">
+        <article class="cel c1" data-rv style="--d:0.00s">
+          <span class="tag">Margem por item ou meta</span>
+          <div>
+            <h3>Margem sobre a venda, sem surpresa no fechamento</h3>
+            <p style="margin-top:12px">Defina a margem geral, ajuste linhas específicas ou peça a meta do projeto. O app distribui o preço e mostra a margem efetiva depois do desconto e das taxas.</p>
+          </div>
+          <div class="mini-tab num">
+            <div><span>Custo total</span><b>R$ 11.870,00</b></div>
+            <div><span>Desconto 5%</span><b>− R$ 963,25</b></div>
+            <div class="forte"><span>Margem efetiva</span><b>35,1%</b></div>
+          </div>
+        </article>
+        <article class="cel c2" data-rv style="--d:0.08s">
+          <span class="tag">Chapas e rolos</span>
+          <div>
+            <h3>Área, perda e chapa inteira lado a lado</h3>
+            <p style="margin-top:12px">Informe as peças e o formato da chapa. O app compara a estimativa por área com o plano de corte e deixa você cobrar o rateio ou a compra inteira.</p>
+          </div>
+          <div class="selos num"><span>8,28 m² com perda</span><span>2 chapas pelo plano</span><span>sobra 3,92 m²</span></div>
+        </article>
+        <article class="cel c3" data-rv style="--d:0.16s">
+          <span class="tag">Assistente</span>
+          <div><h3>Dicas enquanto você monta</h3><p style="margin-top:10px">LED sem fonte, peça externa sem vedação, custo pendente, desconto que derruba a margem.</p></div>
+        </article>
+        <article class="cel c4" data-rv style="--d:0.00s">
+          <span class="tag">Emissão</span>
+          <div><h3>Proposta emitida não muda</h3><p style="margin-top:10px">Custos, margens e condições ficam congelados. Mudou o preço no catálogo? Só muda o rascunho que você atualizar.</p></div>
+        </article>
+        <article class="cel c5" data-rv style="--d:0.08s">
+          <span class="tag">Fornecedores</span>
+          <div><h3>Contato em um toque</h3><p style="margin-top:10px">WhatsApp, ligação, e-mail, site e rota direto do cartão e do orçamento aberto.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="modelos" style="padding-top:0">
+    <div class="wrap">
+      <div class="cab">
+        <div data-rv><span class="olho">Modelos editáveis</span><h2>Comece pelo tipo de projeto</h2></div>
+        <p data-rv="dir" style="--d:.12s">Cada modelo traz os entregáveis e as famílias de materiais e serviços. Você ajusta medidas, custos e margens.</p>
+      </div>
+      <div class="modelos">
+        <article class="modelo dest" data-rv style="--d:0.00s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="11" rx="1"/><path d="M3 20h18M7 16v4M17 16v4"/></svg></span><h3>Fachada em ACM</h3><p>Chapas, estrutura, fixação, vedação e instalação.</p><div class="mats"><span>ACM</span><span>metalon</span><span>fita VHB</span><span>selante</span></div></article>
+        <article class="modelo" data-rv style="--d:0.07s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V6l5 8V6M14 6h6M17 6v12"/></svg></span><h3>Letra caixa iluminada</h3><p>Corpo, face em acrílico, LED e fonte compatível.</p><div class="mats"><span>acrílico</span><span>módulo LED</span><span>fonte</span></div></article>
+        <article class="modelo" data-rv style="--d:0.14s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="8" cy="9" r="1"/><circle cx="16" cy="9" r="1"/></svg></span><h3>Placa de acrílico</h3><p>Corte, impressão UV ou adesivo e espaçadores.</p><div class="mats"><span>acrílico</span><span>impressão UV</span><span>espaçador</span></div></article>
+        <article class="modelo" data-rv style="--d:0.21s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 12h18M12 4v16"/></svg></span><h3>Adesivação de vitrine</h3><p>Vinil impresso, perfurado ou jateado e aplicação.</p><div class="mats"><span>vinil</span><span>laminado</span><span>aplicação</span></div></article>
+        <article class="modelo" data-rv style="--d:0.00s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 4h14v12H5zM9 16v4M15 16v4"/></svg></span><h3>Banner</h3><p>Lona frontlight, ilhós ou bastão e acabamento.</p><div class="mats"><span>lona</span><span>ilhós</span><span>bastão</span></div></article>
+        <article class="modelo" data-rv style="--d:0.07s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h12l-3-3M16 12l-3 3M20 5v14"/></svg></span><h3>Sinalização interna</h3><p>Placas indicativas em PS ou acrílico e fixação.</p><div class="mats"><span>PS</span><span>acrílico</span><span>vinil</span></div></article>
+        <article class="modelo" data-rv style="--d:0.14s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20l3-14h6l3 14M8 13h8"/></svg></span><h3>Display</h3><p>Acrílico ou PVC, impressão, dobra e montagem.</p><div class="mats"><span>acrílico</span><span>PVC</span><span>dobra</span></div></article>
+        <article class="modelo" data-rv style="--d:0.21s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span><h3>Itens avulsos</h3><p>Qualquer material ou serviço fora dos modelos.</p><div class="mats"><span>catálogo</span><span>avulso</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="fluxo" style="padding-top:0">
+    <div class="wrap">
+      <div class="fluxo">
+        <div class="cab" style="margin-bottom:0">
+        <div data-rv><span class="olho">Como funciona</span><h2>Seis etapas até o PDF</h2></div>
+          <p data-rv="dir" style="--d:.12s">Salve rascunhos incompletos quando quiser. Para emitir, todo item precisa de custo ou de custo zero confirmado.</p>
+        </div>
+        <ol class="passos">
+          <li data-rv style="--d:0.00s"><b>Cliente</b><span>Contato, endereço de instalação e fotos.</span></li>
+          <li data-rv style="--d:0.06s"><b>Projeto</b><span>Medidas, ambiente e escopo.</span></li>
+          <li data-rv style="--d:0.12s"><b>Materiais e serviços</b><span>Catálogo, modelo ou avulso.</span></li>
+          <li data-rv style="--d:0.18s"><b>Margens</b><span>Geral, por item ou meta.</span></li>
+          <li data-rv style="--d:0.24s"><b>Revisão</b><span>Custo, preço, desconto e resultado.</span></li>
+          <li data-rv style="--d:0.30s"><b>PDF</b><span>A4 com a marca, pronto para enviar.</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="calculadora" style="padding-top:0">
+    <div class="wrap calc">
+      <div class="calc-in" data-rv="esq">
+        <span class="olho">Calculadora de margem</span>
+        <h2>Preço pela margem sobre a venda</h2>
+        <p>Margem é (venda − custo) ÷ venda, então o preço é custo ÷ (1 − margem). O app usa essa conta em cada linha e no PDF.</p>
+        <div class="campos">
+          <div class="campo"><label for="custo">Custo</label><div class="in"><span>R$</span><input id="custo" inputmode="decimal" value="100,00" autocomplete="off"></div></div>
+          <div class="campo"><label for="margem">Margem</label><div class="in"><input id="margem" inputmode="decimal" value="40" autocomplete="off"><span>%</span></div></div>
+        </div>
+        <div class="trilho"><input id="faixa-m" type="range" min="0" max="80" step="1" value="40" aria-label="Ajustar margem"></div>
+        <div class="erro" id="erro" role="status"></div>
+      </div>
+      <div class="calc-out" data-rv="dir" style="--d:.1s" aria-live="polite">
+        <div><div class="rot">Preço de venda</div><div class="preco num" id="preco">R$ 166,67</div></div>
+        <dl class="num">
+          <dt>Resultado</dt><dd id="lucro">R$ 66,67</dd>
+          <dt>Markup equivalente</dt><dd id="markup">66,67%</dd>
+        </dl>
+        <p class="nota">Markup é outra conta: custo × (1 + markup). Por isso 40% de margem equivale a 66,67% de markup.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="fornecedores" style="padding-top:0">
+    <div class="wrap">
+      <div class="cab">
+        <div data-rv><span class="olho">Catálogo inicial</span><h2>Fornecedores do corredor da Avenida Brasil</h2></div>
+        <p data-rv="dir" style="--d:.12s">Contatos conferidos nas páginas oficiais, com fonte e data da consulta. O que ainda não foi confirmado aparece sinalizado no app.</p>
+      </div>
+      <div class="forns">
+        <div class="forn principal" data-rv style="--d:0.00s"><span class="lg ini">DM</span><div><b>Dacril Multicor</b><small>Cordovil</small><span class="selo">Principal em acrílico</span></div></div>
+        <div class="forn" data-rv style="--d:0.06s"><span class="lg"><img src="./logos/universal.png" alt=""></span><div><b>Universal Acrílicos</b><small>Penha</small></div></div>
+        <div class="forn" data-rv style="--d:0.12s"><span class="lg escuro"><img src="./logos/viaflex.png" alt=""></span><div><b>ViaFlex BR</b><small>Ramos</small></div></div>
+        <div class="forn" data-rv style="--d:0.18s"><span class="lg"><img src="./logos/harto.png" alt=""></span><div><b>Harto</b><small>Inhaúma</small></div></div>
+        <div class="forn" data-rv style="--d:0.00s"><span class="lg"><img src="./logos/sinaliza.png" alt=""></span><div><b>Sinaliza Placas</b><small>Del Castilho</small></div></div>
+        <div class="forn" data-rv style="--d:0.06s"><span class="lg ini">VM</span><div><b>Vivametal</b><small>Ramos</small></div></div>
+        <div class="forn" data-rv style="--d:0.12s"><span class="lg ini">CL</span><div><b>Casa das Letras</b><small>Cachambi</small></div></div>
+        <div class="forn" data-rv style="--d:0.18s"><span class="lg ini">MC</span><div><b>Mundo das Cores</b><small>Tijuca</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="app" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta" data-rv="zoom">
+        <div>
+          <h2>Pronto para a <span>próxima proposta</span>?</h2>
+          <p>Cliente, projeto, materiais, margens, revisão e PDF. Tudo no mesmo lugar, com a marca da Criativa.</p>
+        </div>
+        <a class="btn btn-magenta" href="#app">Abrir o app <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="rodape" data-rv>
+      <div><img src="./logos/criativa.png" alt="Criativa"><p>Criativa Solutions é o app interno de orçamentos da Criativa Grupo.</p></div>
+      <div><b>Endereço</b><address>Rua Guilhermina, 432<br>Rio de Janeiro, RJ · 20756-060</address></div>
+      <div><b>Contato</b><address><span>(21) 96490-3804</span><span>contato@criativagrupo.com.br</span><a href="https://www.instagram.com/criativagrupo.oficial" target="_blank" rel="noopener">@criativagrupo.oficial</a></address></div>
+    </div>
+  </div>
+</footer>
+
+</div>
+<div id="root"></div>
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var clamp = function (x) { return Math.max(0, Math.min(1, x)); };
+  var ease = function (t) { return 1 - Math.pow(1 - t, 3); };
+  var pronto = false;
+
+  /* Reveal in/out: elements animate in when they enter and back out when they leave. */
+  var revs = [].slice.call(document.querySelectorAll("[data-rv]"));
+  var io = "IntersectionObserver" in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (!pronto) return; e.target.classList.toggle("in", e.isIntersecting); });
+  }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }) : null;
+  function revelarVisiveis() {
+    revs.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.top < innerHeight * 0.94 && r.bottom > 0) el.classList.add("in");
+    });
+  }
+  if (io) revs.forEach(function (el) { io.observe(el); }); else revs.forEach(function (el) { el.classList.add("in"); });
+
+  /* Preloader: counter + bar, then a curtain wipe. Skeleton in the hero mock resolves right after. */
+  var pre = document.getElementById("pre");
+  function abrir() {
+    if (pronto) return;
+    pronto = true;
+    pre.classList.add("sai");
+    setTimeout(function () { pre.style.display = "none"; }, 950);
+    setTimeout(revelarVisiveis, 250);
+    setTimeout(function () { document.getElementById("proposta").classList.add("pronta"); }, 1300);
+  }
+  if (reduce) { pronto = true; pre.style.display = "none"; revs.forEach(function (el) { el.classList.add("in"); }); document.getElementById("proposta").classList.add("pronta"); }
+  else {
+    var t0 = performance.now(), dur = 1500, cont = document.getElementById("preCont"), linha = document.getElementById("preLinha");
+    (function passo(t) {
+      var k = ease(clamp((t - t0) / dur));
+      cont.firstChild.nodeValue = Math.round(k * 100);
+      linha.style.setProperty("--p", k.toFixed(3));
+      if (k < 1) requestAnimationFrame(passo); else setTimeout(abrir, 220);
+    })(t0);
+    setTimeout(abrir, 4000); // never keep the page hidden
+  }
+
+  /* Side drawer */
+  var btn = document.getElementById("menuBtn"), gav = document.getElementById("gaveta"), fundo = document.getElementById("gavetaFundo");
+  function menu(abre) {
+    root.classList.toggle("menu-aberto", abre);
+    btn.setAttribute("aria-expanded", abre);
+    gav.setAttribute("aria-hidden", !abre);
+    if (abre) gav.querySelector("a").focus({ preventScroll: true }); else btn.focus({ preventScroll: true });
+  }
+  btn.addEventListener("click", function () { menu(true); });
+  document.getElementById("fechar").addEventListener("click", function () { menu(false); });
+  fundo.addEventListener("click", function () { menu(false); });
+  gav.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { menu(false); }); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && root.classList.contains("menu-aberto")) menu(false); });
+
+  /* Scroll-driven: parallax, marquee, pinned showcase, side rail */
+  var px = [].slice.call(document.querySelectorAll("[data-px]"));
+  var faixa = document.getElementById("faixa");
+  var vit = document.getElementById("ferramenta"), cenas = [].slice.call(vit.querySelectorAll(".cena")), etapas = [].slice.call(document.querySelectorAll("#etapas li"));
+  var janela = document.getElementById("janela"), vitProg = document.getElementById("vitProg");
+  var trilha = document.getElementById("trilha"), marcas = [].slice.call(trilha.querySelectorAll("a"));
+  var alvos = marcas.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+  var gavLinks = [].slice.call(gav.querySelectorAll("a"));
+  var fixo = function () { return window.matchMedia("(min-width: 981px)").matches; };
+  var atual = -1;
+
+  function quadro() {
+    var y = scrollY, h = innerHeight;
+    if (!reduce) {
+      px.forEach(function (el) {
+        var r = el.getBoundingClientRect(), c = r.top + r.height / 2 - h / 2;
+        el.style.translate = "0 " + (c * parseFloat(el.dataset.px)).toFixed(1) + "px";
+      });
+      var fr = faixa.parentNode.getBoundingClientRect();
+      faixa.style.setProperty("--x", (-(h - fr.top) * 0.45).toFixed(1) + "px");
+    }
+    if (fixo()) {
+      var vr = vit.getBoundingClientRect(), p = clamp(-vr.top / (vit.offsetHeight - h));
+      var n = cenas.length, f = p * n, i = Math.min(n - 1, Math.floor(f));
+      if (i !== atual) {
+        atual = i;
+        cenas.forEach(function (c, k) { c.classList.toggle("ativa", k === i); c.classList.toggle("saiu", k < i); });
+        etapas.forEach(function (li, k) { li.classList.toggle("ativo", k === i); });
+      }
+      etapas.forEach(function (li, k) { li.style.setProperty("--f", clamp(f - k).toFixed(3)); });
+      vitProg.style.setProperty("--vp", p.toFixed(3));
+      if (!reduce) { janela.style.setProperty("--rot", ((0.5 - p) * 10).toFixed(2)); janela.style.setProperty("--rotx", ((p - 0.5) * -4).toFixed(2)); }
+    }
+    var max = document.documentElement.scrollHeight - h, ativo = 0;
+    trilha.style.setProperty("--prog", clamp(y / max).toFixed(3));
+    alvos.forEach(function (el, k) { if (el && el.getBoundingClientRect().top < h * 0.45) ativo = k; });
+    marcas.forEach(function (a, k) { a.classList.toggle("ativo", k === ativo); a.classList.toggle("passou", k < ativo); });
+    gavLinks.forEach(function (a) { a.classList.toggle("ativo", a.getAttribute("href") === marcas[ativo].getAttribute("href")); });
+  }
+  etapas.forEach(function (li, k) {
+    li.addEventListener("click", function () {
+      if (!fixo()) return;
+      var topo = vit.offsetTop + (vit.offsetHeight - innerHeight) * ((k + 0.5) / cenas.length);
+      window.scrollTo({ top: topo, behavior: reduce ? "auto" : "smooth" });
+    });
+  });
+  var pend = false;
+  addEventListener("scroll", function () { if (!pend) { pend = true; requestAnimationFrame(function () { quadro(); pend = false; }); } }, { passive: true });
+  addEventListener("resize", quadro);
+  quadro();
+
+  /* Margin calculator: price = cost ÷ (1 − margin), in integer cents. */
+  var custo = document.getElementById("custo"), margem = document.getElementById("margem"), faixaM = document.getElementById("faixa-m");
+  var brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+  var pct = function (x) { return x.toLocaleString("pt-BR", { maximumFractionDigits: 2 }) + "%"; };
+  var num = function (s) { s = String(s).replace(/R\$|%|\s/g, ""); if (s.indexOf(",") >= 0) s = s.replace(/\./g, "").replace(",", "."); return /^\d+(\.\d+)?$/.test(s) ? parseFloat(s) : NaN; };
+  function calc() {
+    var c = Math.round(num(custo.value) * 100), m = num(margem.value), err = document.getElementById("erro");
+    if (!(c >= 0)) { err.textContent = "Informe o custo em reais, por exemplo 100,00."; return; }
+    if (!(m >= 0 && m < 100)) { err.textContent = "A margem precisa ficar entre 0% e menos de 100%."; return; }
+    err.textContent = "";
+    var bp = Math.round(m * 100), preco = Math.round(c * 10000 / (10000 - bp));
+    document.getElementById("preco").textContent = brl.format(preco / 100);
+    document.getElementById("lucro").textContent = brl.format((preco - c) / 100);
+    document.getElementById("markup").textContent = c > 0 ? pct((preco - c) / c * 100) : "—";
+  }
+  custo.addEventListener("input", calc);
+  margem.addEventListener("input", function () { var m = num(margem.value); if (m >= 0 && m <= 80) faixaM.value = m; calc(); });
+  faixaM.addEventListener("input", function () { margem.value = faixaM.value; calc(); });
+  calc();
+})();
+</script>
+
+<script type="module" src="/src/main.tsx"></script>
+</body>
 </html>
