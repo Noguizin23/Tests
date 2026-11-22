@@ -11,10 +11,10 @@ import type { Supplier } from "@/domain/types";
 
 export function PageHead({ title, desc, children }: { title: string; desc?: string; children?: ReactNode }) {
   return (
-    <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
+    <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
       <div className="min-w-0">
-        <h1 className="text-3xl md:text-4xl font-extrabold leading-tight">{title}</h1>
-        {desc ? <p className="text-muted-foreground mt-1 max-w-2xl">{desc}</p> : null}
+        <h1 className="text-4xl md:text-5xl font-extrabold leading-[1.05]">{title}</h1>
+        {desc ? <p className="text-muted-foreground mt-3 max-w-xl">{desc}</p> : null}
       </div>
       {children ? <div className="flex flex-wrap gap-2">{children}</div> : null}
     </div>
@@ -190,9 +190,9 @@ export function Sk({ className }: { className?: string }) {
 
 export function Stat({ label, value, tone }: { label: string; value: ReactNode; tone?: "roxo" | "magenta" | "tinta" }) {
   return (
-    <div className={cn("rounded-2xl p-4 border bg-card", tone === "roxo" && "bg-primary text-primary-foreground border-primary", tone === "magenta" && "bg-magenta text-white border-magenta", tone === "tinta" && "bg-foreground text-background border-foreground")}>
+    <div className={cn("rounded-3xl p-6 border bg-card", tone === "roxo" && "bg-primary text-primary-foreground border-primary", tone === "magenta" && "bg-magenta text-white border-magenta", tone === "tinta" && "bg-foreground text-background border-foreground")}>
       <p className={cn("text-xs font-bold uppercase tracking-wide", tone ? "opacity-80" : "text-muted-foreground")}>{label}</p>
-      <p className="font-heading text-2xl font-extrabold tabular mt-1">{value}</p>
+      <p className="font-heading text-3xl font-extrabold tabular mt-2">{value}</p>
     </div>
   );
 }

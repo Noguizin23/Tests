@@ -83,12 +83,12 @@ function Editor({ q }: { q: Quote }) {
 
   return (
     <div className="pb-24 lg:pb-0">
-      <div className="flex flex-wrap items-start justify-between gap-3 mb-5">
+      <div className="flex flex-wrap items-start justify-between gap-3 mb-8">
         <div className="min-w-0">
           <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground tabular">
             Proposta {String(q.number).padStart(4, "0")} · revisão {q.revision} · {client?.name ?? "sem cliente"}
           </p>
-          <h1 className="text-2xl md:text-3xl font-extrabold leading-tight mt-1 break-words">{q.title}</h1>
+          <h1 className="text-3xl md:text-4xl font-extrabold leading-tight mt-2 break-words max-w-3xl">{q.title}</h1>
         </div>
         <div className="flex gap-2 items-center">
           {q.demo ? <Badge variant="outline" className="border-magenta text-magenta">Valores fictícios</Badge> : null}
@@ -104,7 +104,7 @@ function Editor({ q }: { q: Quote }) {
       ) : null}
       {err ? <div className="mb-5 rounded-2xl border border-destructive/40 bg-destructive/5 p-4 text-sm text-destructive">{err}</div> : null}
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px] items-start">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px] items-start">
         <Tabs value={tab} onValueChange={setTab} className="min-w-0">
           <div className="overflow-x-auto -mx-1 px-1">
             <TabsList className="h-11 w-max">
@@ -115,11 +115,11 @@ function Editor({ q }: { q: Quote }) {
               <TabsTrigger value="pdf" className="px-3">5 · PDF</TabsTrigger>
             </TabsList>
           </div>
-          <TabsContent value="projeto" className="mt-5"><ProjectTab q={q} ro={ro} update={update} /></TabsContent>
-          <TabsContent value="itens" className="mt-5">{calc ? <ItemsTab q={q} calc={calc} ro={ro} update={update} setLine={setLine} /> : null}</TabsContent>
-          <TabsContent value="margens" className="mt-5">{calc ? <MarginsTab q={q} calc={calc} ro={ro} update={update} setLine={setLine} /> : null}</TabsContent>
-          <TabsContent value="revisao" className="mt-5">{calc ? <ReviewTab q={q} calc={calc} ro={ro} setLine={setLine} /> : null}</TabsContent>
-          <TabsContent value="pdf" className="mt-5"><PdfTab q={q} ro={ro} update={update} /></TabsContent>
+          <TabsContent value="projeto" className="mt-8"><ProjectTab q={q} ro={ro} update={update} /></TabsContent>
+          <TabsContent value="itens" className="mt-8">{calc ? <ItemsTab q={q} calc={calc} ro={ro} update={update} setLine={setLine} /> : null}</TabsContent>
+          <TabsContent value="margens" className="mt-8">{calc ? <MarginsTab q={q} calc={calc} ro={ro} update={update} setLine={setLine} /> : null}</TabsContent>
+          <TabsContent value="revisao" className="mt-8">{calc ? <ReviewTab q={q} calc={calc} ro={ro} setLine={setLine} /> : null}</TabsContent>
+          <TabsContent value="pdf" className="mt-8"><PdfTab q={q} ro={ro} update={update} /></TabsContent>
         </Tabs>
         <aside className="hidden lg:block sticky top-6">{summary}</aside>
       </div>
@@ -167,7 +167,7 @@ function Summary({ q, calc, tips, onTab, onRevision }: { q: Quote; calc: QuoteCa
         {p.pendingCount ? <p className="text-xs rounded-xl bg-magenta/20 text-[#FFB3D6] px-3 py-2">{p.pendingCount} item(ns) com custo pendente, somados como zero.</p> : null}
         <div className="grid grid-cols-2 gap-2 pt-1">
           {q.status === "rascunho" ? <Button className="bg-white text-foreground hover:bg-white/90" onClick={() => onTab("revisao")}><FileCheck2 /> Revisar e emitir</Button> : <Button className="bg-white text-foreground hover:bg-white/90" onClick={onRevision}><GitBranch /> Nova revisão</Button>}
-          <Button className="bg-primary" onClick={() => onTab("pdf")}><Download /> PDF</Button>
+          <Button className="bg-magenta hover:bg-magenta/90" onClick={() => onTab("pdf")}><Download /> PDF</Button>
         </div>
       </div>
       <Assistant q={q} calc={calc} tips={tips} />
@@ -210,7 +210,7 @@ function Assistant({ q, calc, tips }: { q: Quote; calc: QuoteCalc; tips: Tip[] }
           const I = icon[t.level];
           const sup = t.supplierId ? st.suppliers.find((s) => s.id === t.supplierId) : undefined;
           return (
-            <li key={i} className={cn("rounded-xl px-3 py-2.5 text-sm flex gap-2.5 animate-in fade-in slide-in-from-right-2", t.level === "critico" ? "bg-magenta/10 text-[#A1004F]" : t.level === "aviso" ? "bg-amber-50 text-aviso" : "bg-roxo-50 text-secondary-foreground")} style={{ animationDelay: `${i * 40}ms` }}>
+            <li key={i} className={cn("rounded-xl px-3 py-2.5 text-sm flex gap-2.5 animate-in fade-in slide-in-from-right-2", t.level === "critico" ? "bg-magenta/10 text-[#A1004F]" : t.level === "aviso" ? "bg-amber-50 text-aviso" : "bg-muted text-foreground")} style={{ animationDelay: `${i * 40}ms` }}>
               <I className="size-4 shrink-0 mt-0.5" />
               <div className="grid gap-2 min-w-0"><span>{t.text}</span>{sup ? <ContactButtons s={sup} compact /> : null}</div>
             </li>
@@ -246,8 +246,8 @@ function ProjectTab({ q, ro, update }: { q: Quote; ro: boolean; update: (p: Part
     } catch (e) { toast.error((e as Error).message); }
   };
   return (
-    <div className="grid gap-5">
-      <section className="rounded-3xl border bg-card p-5 grid gap-4">
+    <div className="grid gap-6">
+      <section className="rounded-3xl border bg-card p-6 md:p-8 grid gap-5">
         <h2 className="text-lg font-bold">Cliente</h2>
         <div className="grid md:grid-cols-2 gap-4">
           <Field label="Cliente" htmlFor="q-cliente">
@@ -261,7 +261,7 @@ function ProjectTab({ q, ro, update }: { q: Quote; ro: boolean; update: (p: Part
           </div>
         </div>
       </section>
-      <section className="rounded-3xl border bg-card p-5 grid gap-4">
+      <section className="rounded-3xl border bg-card p-6 md:p-8 grid gap-5">
         <h2 className="text-lg font-bold">Projeto</h2>
         <Field label="Título" htmlFor="q-titulo"><Commit id="q-titulo" value={q.title} onCommit={(v) => update({ title: v })} disabled={ro} /></Field>
         <div className="grid md:grid-cols-2 gap-4">
@@ -327,7 +327,7 @@ function ItemsTab({ q, calc, ro, update, setLine }: { q: Quote; calc: QuoteCalc;
   const renameGroup = (from: string, to: string) => to.trim() && update({ lines: q.lines.map((l) => ((l.deliverable || "Itens") === from ? { ...l, deliverable: to.trim() } : l)) });
 
   return (
-    <div className="grid gap-5">
+    <div className="grid gap-6">
       {!ro ? (
         <div className="flex flex-wrap gap-2">
           <Button onClick={() => setAdd(true)}><Search /> Adicionar do catálogo</Button>
@@ -346,7 +346,7 @@ function ItemsTab({ q, calc, ro, update, setLine }: { q: Quote; calc: QuoteCalc;
               <span className="text-sm tabular"><span className="text-muted-foreground">Entregável · </span><b>{money(tot)}</b></span>
             </header>
             <div className="overflow-x-auto">
-              <Table className="min-w-[980px]">
+              <Table className="min-w-[860px] [&_td]:py-4">
                 <TableHeader>
                   <TableRow>
                     <TableHead className="w-[26%]">Item</TableHead>
@@ -355,7 +355,6 @@ function ItemsTab({ q, calc, ro, update, setLine }: { q: Quote; calc: QuoteCalc;
                     <TableHead className="text-right">Custo unit. (compra)</TableHead>
                     <TableHead>Compra</TableHead>
                     <TableHead className="text-right">Custo</TableHead>
-                    <TableHead className="text-right">Margem própria</TableHead>
                     <TableHead className="text-right">Preço</TableHead>
                     <TableHead />
                   </TableRow>
@@ -393,7 +392,6 @@ function ItemsTab({ q, calc, ro, update, setLine }: { q: Quote; calc: QuoteCalc;
                           ) : <span className="text-muted-foreground">—</span>}
                         </TableCell>
                         <TableCell className="align-top text-right tabular whitespace-nowrap">{c.costCents == null ? <span className="text-magenta font-semibold">pendente</span> : money(c.costCents)}</TableCell>
-                        <TableCell className="align-top w-28"><PctInput value={l.marginBp ?? null} allowEmpty placeholder={pct(q.pricingMode === "meta" ? q.targetMarginBp : q.marginBp)} onChange={(v) => setLine(l.id, { marginBp: v })} disabled={ro} /></TableCell>
                         <TableCell className="align-top text-right tabular font-bold whitespace-nowrap">{money(pl?.priceCents ?? 0)}<p className="text-[11px] text-muted-foreground font-normal">{pct(pl?.marginBp ?? 0)}</p></TableCell>
                         <TableCell className="align-top whitespace-nowrap">
                           <Button variant="ghost" size="icon-sm" onClick={() => setEdit(l)} aria-label="Detalhes do item" title="Detalhes, chapa e plano de corte"><Settings2 /></Button>
@@ -635,8 +633,8 @@ function MarginsTab({ q, calc, ro, update, setLine }: { q: Quote; calc: QuoteCal
   const p = calc.pricing;
   const markup = (bp: number) => (bp >= 10000 ? "—" : pct(Math.round((bp * 10000) / (10000 - bp))));
   return (
-    <div className="grid gap-5">
-      <section className="rounded-3xl border bg-card p-5 grid gap-4">
+    <div className="grid gap-6">
+      <section className="rounded-3xl border bg-card p-6 md:p-8 grid gap-5">
         <div className="flex flex-wrap gap-2">
           <Button disabled={ro} variant={q.pricingMode === "item" ? "default" : "outline"} onClick={() => update({ pricingMode: "item" })}>Por item</Button>
           <Button disabled={ro} variant={q.pricingMode === "meta" ? "default" : "outline"} onClick={() => update({ pricingMode: "meta" })}>Meta do projeto</Button>
@@ -704,7 +702,7 @@ function ReviewTab({ q, calc, ro, setLine }: { q: Quote; calc: QuoteCalc; ro: bo
     } catch (e) { toast.error((e as Error).message); }
   };
   return (
-    <div className="grid gap-5">
+    <div className="grid gap-6">
       <section className="grid grid-cols-2 md:grid-cols-3 gap-3">
         <Box label="Custo total" v={money(p.costCents)} />
         <Box label="Preço de venda" v={money(p.subtotalCents)} />
@@ -799,8 +797,8 @@ function PdfTab({ q, ro, update }: { q: Quote; ro: boolean; update: (p: Partial<
     } catch { toast.error("Não foi possível gerar o PDF. Tente de novo."); } finally { setBusy(false); }
   };
   return (
-    <div className="grid gap-5">
-      <section className="rounded-3xl border bg-card p-5 grid gap-4">
+    <div className="grid gap-6">
+      <section className="rounded-3xl border bg-card p-6 md:p-8 grid gap-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex gap-2">
             <Button disabled={ro} variant={q.display === "entregaveis" ? "default" : "outline"} onClick={() => update({ display: "entregaveis" })}>Valores por entregável</Button>

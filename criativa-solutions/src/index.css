@@ -63,18 +63,18 @@
     --card-foreground: #212121;
     --popover: #FFFFFF;
     --popover-foreground: #212121;
-    --primary: #7F3D9F;
+    --primary: #D6006B; /* magenta for actions (AA on white text); brand #EF0075 for accents */
     --primary-foreground: #FFFFFF;
-    --secondary: #F4EEF7;
-    --secondary-foreground: #4E2463;
+    --secondary: #FDEBF3;
+    --secondary-foreground: #A1004F;
     --muted: #F3F1F4;
     --muted-foreground: #67606D;
-    --accent: #F4EEF7;
-    --accent-foreground: #4E2463;
+    --accent: #FDEBF3;
+    --accent-foreground: #A1004F;
     --destructive: #D4183D;
     --border: #E7E2EB;
     --input: #DDD6E2;
-    --ring: #7F3D9F;
+    --ring: #EF0075;
     --chart-1: #7F3D9F;
     --chart-2: #EF0075;
     --chart-3: #212121;
@@ -83,7 +83,7 @@
     --radius: 0.75rem;
     --sidebar: #212121;
     --sidebar-foreground: #FFFFFF;
-    --sidebar-primary: #7F3D9F;
+    --sidebar-primary: #EF0075;
     --sidebar-primary-foreground: #FFFFFF;
     --sidebar-accent: #2E2E2E;
     --sidebar-accent-foreground: #FFFFFF;

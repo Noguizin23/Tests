@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { companyOrDefault, useStore } from "@/data/store";
 import { calcQuote, duplicate, revise } from "@/domain/quote";
-import { date, money, uid } from "@/domain/format";
+import { money, uid } from "@/domain/format";
 import type { Quote } from "@/domain/types";
 import { Empty, Field, PageHead, Stat } from "./common";
 import { newQuote, nextNumber, nextRevision } from "./ops";
@@ -52,14 +52,13 @@ export default function Dashboard() {
         <Button size="lg" onClick={() => setNovo(true)}><Plus /> Novo orçamento</Button>
       </PageHead>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
         <Stat label="Rascunhos" value={rows.filter((r) => r.q.status === "rascunho").length} />
         <Stat label="Emitidas" value={issued.length} />
-        <Stat label="Total emitido" value={money(issued.reduce((a, r) => a + r.total, 0))} tone="roxo" />
-        <Stat label="Clientes" value={st.clients.length} tone="tinta" />
+        <Stat label="Total emitido" value={money(issued.reduce((a, r) => a + r.total, 0))} tone="magenta" />
       </div>
 
-      <div className="relative mb-4 max-w-md">
+      <div className="relative mb-6 max-w-md">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
         <Input id="busca-orc" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar por número, título ou cliente" className="pl-9 h-10" />
       </div>
@@ -67,7 +66,7 @@ export default function Dashboard() {
       {rows.length === 0 ? (
         <Empty title="Nenhum orçamento ainda"><Button onClick={() => setNovo(true)}><FilePlus2 /> Criar o primeiro</Button></Empty>
       ) : (
-        <div className="rounded-2xl border bg-card overflow-x-auto">
+        <div className="rounded-3xl border bg-card overflow-x-auto [&_td]:py-4 [&_th]:h-12">
           <Table>
             <TableHeader>
               <TableRow>
@@ -76,7 +75,6 @@ export default function Dashboard() {
                 <TableHead className="hidden md:table-cell">Cliente</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-right">Total</TableHead>
-                <TableHead className="hidden md:table-cell">Atualizado</TableHead>
                 <TableHead className="text-right">Ações</TableHead>
               </TableRow>
             </TableHeader>
@@ -88,7 +86,6 @@ export default function Dashboard() {
                   <TableCell className="hidden md:table-cell">{clientName(x.clientId)}</TableCell>
                   <TableCell>{x.status === "emitida" ? <Badge className="bg-ok text-white">Emitida</Badge> : <Badge variant="secondary">Rascunho</Badge>}</TableCell>
                   <TableCell className="text-right tabular font-bold whitespace-nowrap">{money(total)}</TableCell>
-                  <TableCell className="hidden md:table-cell tabular text-muted-foreground">{date(x.updatedAt)}</TableCell>
                   <TableCell className="text-right whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
                     <Button variant="ghost" size="icon-sm" title="Duplicar como nova proposta" aria-label="Duplicar" onClick={() => dup(x)}><Copy /></Button>
                     <Button variant="ghost" size="icon-sm" title="Criar revisão" aria-label="Criar revisão" onClick={() => rev(x)}><GitBranch /></Button>

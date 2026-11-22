@@ -41,7 +41,7 @@ export default function Suppliers() {
       <PageHead title="Fornecedores" desc="Contatos comerciais com fonte e data. Os contatos ficam só na área interna do app.">
         <Button size="lg" onClick={() => setEdit({ id: uid(), name: "", kinds: [], neighborhood: "", phones: [], emails: [], categories: [], verification: "Cadastro manual.", sources: [] })}><Plus /> Novo fornecedor</Button>
       </PageHead>
-      <div className="flex flex-wrap gap-2 mb-5">
+      <div className="flex flex-wrap gap-2 mb-8">
         <div className="relative flex-1 min-w-[220px] max-w-md"><Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" /><Input id="busca-forn" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar por nome, material ou bairro" className="pl-9 h-10" /></div>
         <div className="flex flex-wrap gap-1.5">
           {["todos", ...bairros].map((b) => (
@@ -50,9 +50,9 @@ export default function Suppliers() {
         </div>
       </div>
       {list.length === 0 ? <Empty title="Nenhum fornecedor encontrado" /> : (
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {list.map((s, i) => (
-            <article key={s.id} className={`rounded-3xl border bg-card p-5 grid gap-4 content-start animate-in fade-in slide-in-from-bottom-2 ${s.featured ? "border-magenta ring-4 ring-magenta/10" : ""}`} style={{ animationDelay: `${Math.min(i, 8) * 40}ms`, animationFillMode: "both" }}>
+            <article key={s.id} className={`rounded-3xl border bg-card p-6 grid gap-5 content-start animate-in fade-in slide-in-from-bottom-2 ${s.featured ? "border-magenta ring-4 ring-magenta/10" : ""}`} style={{ animationDelay: `${Math.min(i, 8) * 40}ms`, animationFillMode: "both" }}>
               <header className="flex gap-3 items-start">
                 <SupplierLogo s={s} />
                 <div className="min-w-0 flex-1">
@@ -62,13 +62,10 @@ export default function Suppliers() {
                   {s.demo ? <Badge variant="outline" className="border-magenta text-magenta mt-1">fictício</Badge> : null}
                 </div>
               </header>
-              {s.categories.length ? <div className="flex flex-wrap gap-1.5">{s.categories.slice(0, 6).map((c) => <span key={c} className="text-xs rounded-lg bg-muted px-2 py-1">{c}</span>)}{s.categories.length > 6 ? <span className="text-xs text-muted-foreground px-1 py-1">+{s.categories.length - 6}</span> : null}</div> : <p className="text-xs text-muted-foreground">Categorias a confirmar.</p>}
+              {s.categories.length ? <div className="flex flex-wrap gap-1.5">{s.categories.slice(0, 3).map((c) => <span key={c} className="text-xs rounded-lg bg-muted px-2 py-1">{c}</span>)}{s.categories.length > 3 ? <span className="text-xs text-muted-foreground px-1 py-1">+{s.categories.length - 3}</span> : null}</div> : <p className="text-xs text-muted-foreground">Categorias a confirmar.</p>}
               <ContactText s={s} />
               <ContactButtons s={s} />
-              <div className="flex justify-between items-center gap-2 pt-1 border-t">
-                <span className="text-xs text-muted-foreground">{s.sources[0] ? `Consulta ${date(s.sources[0].consultedAt)}` : "Sem fonte"}</span>
-                <Button size="sm" variant="ghost" onClick={() => setOpen(s)}>Ver materiais e cotações</Button>
-              </div>
+              <button type="button" onClick={() => setOpen(s)} className="text-left text-sm font-semibold text-primary hover:underline w-fit">Materiais e cotações →</button>
             </article>
           ))}
         </div>

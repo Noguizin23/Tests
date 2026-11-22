@@ -68,7 +68,7 @@ function Nav({ route, onPick }: { route: Route; onPick?: () => void }) {
             aria-current={route === r ? "page" : undefined}
             className={cn(
               "group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-white/70 transition-colors hover:bg-sidebar-accent hover:text-white",
-              route === r && "bg-sidebar-accent text-white",
+              route === r && "bg-magenta/15 text-white",
             )}
           >
             <span className={cn("absolute left-0 top-2 bottom-2 w-[3px] rounded-full bg-magenta scale-y-0 transition-transform", route === r && "scale-y-100")} />
@@ -145,7 +145,7 @@ function Shell({ route }: { route: Route }) {
           <Nav route={route} onPick={() => setMenu(false)} />
         </SheetContent>
       </Sheet>
-      <main key={route} className="min-w-0 px-4 py-6 md:px-8 md:py-8 animate-in fade-in slide-in-from-bottom-2 duration-500" style={{ paddingLeft: "max(16px, env(safe-area-inset-left))", paddingRight: "max(16px, env(safe-area-inset-right))" }}>
+      <main key={route} className="min-w-0 px-4 py-8 md:px-12 md:py-12 max-w-[1600px] animate-in fade-in slide-in-from-bottom-2 duration-500" style={{ paddingLeft: "max(16px, env(safe-area-inset-left))", paddingRight: "max(16px, env(safe-area-inset-right))" }}>
         {page}
       </main>
     </div>

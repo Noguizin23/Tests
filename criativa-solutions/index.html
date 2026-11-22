@@ -255,7 +255,7 @@ footer { padding-block: 24px 48px; }
 .pre-cont { font: 800 clamp(48px, 10vw, 112px)/.9 var(--display); letter-spacing: -.04em; font-variant-numeric: tabular-nums; color: var(--branco); }
 .pre-cont small { font-size: .32em; color: var(--magenta); margin-left: 4px; }
 .pre-linha { height: 3px; background: rgba(255,255,255,.12); border-radius: 3px; overflow: hidden; }
-.pre-linha i { display: block; height: 100%; width: 100%; transform-origin: left; transform: scaleX(var(--p, 0)); background: linear-gradient(90deg, var(--roxo), var(--magenta)); }
+.pre-linha i { display: block; height: 100%; width: 100%; transform-origin: left; transform: scaleX(var(--p, 0)); background: var(--magenta); }
 .pre-rodape { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font: 700 12px/1.4 var(--body); letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.55); }
 .pre-rodape span { overflow: hidden; }
 .pre-rodape b { display: inline-block; transform: translateY(110%); animation: preSobe .8s .35s cubic-bezier(.2,.8,.2,1) forwards; font-weight: 700; }
@@ -401,6 +401,75 @@ footer { padding-block: 24px 48px; }
 /* parallax layers */
 [data-px] { will-change: transform; }
 
+/* ── Clean pass: more air, more magenta, fewer words ── */
+.hero.limpo { padding-block: 96px 120px; }
+.hero.limpo h1 { font-size: clamp(46px, 7vw, 92px); letter-spacing: -.035em; }
+.hero.limpo h1 .destaque { color: var(--magenta); }
+.hero.limpo h1 .destaque::after { display: none; }
+.hero.limpo .lead { font-size: 20px; margin-top: 28px; }
+.hero.limpo .acoes { margin-top: 40px; }
+.hero.limpo .mock .bloco { background: var(--magenta); }
+.hero.limpo .mock .bloco::before { background: radial-gradient(circle, rgba(127,61,159,.75), rgba(127,61,159,0) 70%); }
+.hero.limpo .estrela { background: var(--roxo); }
+.hero.limpo .linha { grid-template-columns: 34px 1fr auto; padding: 14px 0; }
+.hero.limpo .linha .ic { background: var(--magenta-50); color: var(--magenta); }
+.hero.limpo .total { background: var(--magenta); }
+.hero.limpo .status { background: var(--magenta-50); color: var(--magenta); }
+.hero.limpo .pdf { left: 72px; bottom: 32px; }
+.btn-magenta { box-shadow: 0 12px 26px -12px rgba(239,0,117,.75); }
+.btn-magenta:hover { background: #D1006A; }
+.btn-branco { background: var(--branco); color: var(--magenta); }
+.btn-branco:hover { transform: translateY(-1px); }
+.chip { color: var(--magenta); }
+.olho { margin-bottom: 18px; }
+.sec { padding-block: 140px; }
+.barra nav a:hover { background: var(--magenta-50); color: var(--magenta); }
+.faixa { background: var(--gelo); border: 0; padding-block: 40px; }
+.faixa-trilho span { -webkit-text-stroke-color: #F7B3D2; }
+.faixa-trilho span:nth-child(3n+2) { color: var(--magenta); }
+.vitrine h2 { font-size: clamp(40px, 5vw, 68px); }
+.etapas li::after { background: var(--magenta); }
+.forn-tag { color: var(--magenta); background: var(--magenta-50); }
+.bm .tr i { background: var(--magenta); }
+.bm.own .tr i { background: var(--roxo); }
+.chapa .peca { background: var(--magenta); }
+.a4 .tt { background: var(--magenta); }
+.tres { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.tres .cel { min-height: 300px; justify-content: flex-end; padding: 40px; }
+.tres .cel h3 { font-size: clamp(28px, 2.8vw, 38px); }
+.tres .cel p { margin-top: 12px; font-size: 16px; opacity: .85; }
+.t-mag { background: var(--magenta); color: var(--branco); }
+.t-roxo { background: var(--roxo); color: var(--branco); }
+.t-tinta { background: var(--tinta); color: var(--branco); }
+@media (max-width: 860px) { .tres { grid-template-columns: 1fr; } .tres .cel { min-height: 200px; } }
+.calc-limpa { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.calc-limpa h2 { font-size: clamp(40px, 5vw, 68px); }
+.calc-limpa .campo .in:focus-within { border-color: var(--magenta); }
+.calc-limpa .trilho input { accent-color: var(--magenta); }
+.calc-res { border-left: 2px solid var(--linha); padding-left: 80px; }
+.calc-res .rot { color: var(--suave); }
+.calc-res .preco { font: 800 clamp(56px, 8vw, 104px)/1 var(--display); letter-spacing: -.04em; color: var(--magenta); margin-top: 14px; }
+.calc-res p { margin-top: 20px; color: var(--suave); }
+.calc-res b { color: var(--tinta); }
+@media (max-width: 860px) { .calc-limpa { grid-template-columns: 1fr; gap: 40px; } .calc-res { border-left: 0; padding-left: 0; border-top: 2px solid var(--linha); padding-top: 32px; } }
+.centro { text-align: center; }
+.centro h2 { font-size: clamp(34px, 4.4vw, 56px); }
+.logos { margin-top: 56px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 28px 48px; }
+.logos > img { height: 40px; width: auto; max-width: 140px; object-fit: contain; filter: grayscale(1); opacity: .7; transition: filter .3s, opacity .3s; }
+.logos > img:hover { filter: none; opacity: 1; }
+.lg-escuro { background: var(--tinta); border-radius: 12px; padding: 10px 14px; display: inline-flex; }
+.lg-escuro img { height: 22px; width: auto; }
+.lg-i { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; background: var(--branco); border: 1px solid var(--linha); font: 800 15px/1 var(--display); color: var(--suave); }
+.lg-i.principal { background: var(--magenta); border-color: var(--magenta); color: var(--branco); }
+.cta-mag { background: var(--magenta); display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; padding: 72px; }
+.cta-mag::before { background: radial-gradient(circle, rgba(127,61,159,.7), transparent 65%); }
+.cta-mag::after { background: radial-gradient(circle, rgba(255,255,255,.25), transparent 65%); }
+.cta-mag h2 { max-width: 14ch; }
+@media (max-width: 820px) { .cta-mag { padding: 40px 28px; } .sec { padding-block: 88px; } .hero.limpo { padding-block: 48px 72px; } }
+.rodape-limpo { display: flex; justify-content: space-between; align-items: center; gap: 16px 32px; flex-wrap: wrap; padding-top: 32px; border-top: 1px solid var(--linha); color: var(--suave); font-size: 14px; }
+.rodape-limpo img { height: 22px; width: auto; }
+footer { padding-block: 0 48px; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
@@ -423,7 +492,7 @@ html:not(.modo-app) #root { display: none; }
   <div class="pre-in">
     <div class="pre-marca"><img src="./logos/criativa.png" alt="Criativa"><div class="pre-cont" id="preCont">0<small>%</small></div></div>
     <div class="pre-linha"><i id="preLinha"></i></div>
-    <div class="pre-rodape"><span><b>Criativa Grupo · Comunicação visual</b></span><span><b>+1000 projetos · +20 estados · 2 países</b></span></div>
+    <div class="pre-rodape"><span><b>Criativa Solutions</b></span><span><b>Comunicação visual · Rio de Janeiro</b></span></div>
   </div>
 </div>
 
@@ -434,11 +503,9 @@ html:not(.modo-app) #root { display: none; }
   <ol>
     <li><a href="#inicio">Início</a></li>
     <li><a href="#ferramenta">A ferramenta</a></li>
-    <li><a href="#recursos">Recursos</a></li>
-    <li><a href="#modelos">Modelos</a></li>
-    <li><a href="#fluxo">Como funciona</a></li>
     <li><a href="#calculadora">Calculadora</a></li>
     <li><a href="#fornecedores">Fornecedores</a></li>
+    <li><a href="#app">Abrir o app</a></li>
   </ol>
   <div class="gaveta-pe"><span>Rua Guilhermina, 432 · Rio de Janeiro, RJ</span><span>(21) 96490-3804 · contato@criativagrupo.com.br</span></div>
 </nav>
@@ -446,9 +513,6 @@ html:not(.modo-app) #root { display: none; }
 <nav class="trilha" id="trilha" aria-label="Seções da página">
   <a href="#inicio"><span>Início</span></a>
   <a href="#ferramenta"><span>A ferramenta</span></a>
-  <a href="#recursos"><span>Recursos</span></a>
-  <a href="#modelos"><span>Modelos</span></a>
-  <a href="#fluxo"><span>Como funciona</span></a>
   <a href="#calculadora"><span>Calculadora</span></a>
   <a href="#fornecedores"><span>Fornecedores</span></a>
   <a href="#app"><span>Abrir o app</span></a>
@@ -459,32 +523,25 @@ html:not(.modo-app) #root { display: none; }
     <div class="barra">
       <a href="#inicio" aria-label="Criativa Solutions, início"><img src="./logos/criativa.png" alt="Criativa"></a>
       <nav aria-label="Seções">
-        <a href="#recursos">Recursos</a>
-        <a href="#modelos">Modelos</a>
-        <a href="#fluxo">Como funciona</a>
+        <a href="#ferramenta">A ferramenta</a>
         <a href="#calculadora">Calculadora</a>
         <a href="#fornecedores">Fornecedores</a>
       </nav>
-      <div class="barra-dir"><a class="btn btn-roxo" href="#app">Abrir o app</a><button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="gaveta"><span></span></button></div>
+      <div class="barra-dir"><a class="btn btn-magenta" href="#app">Abrir o app</a><button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="gaveta"><span></span></button></div>
     </div>
   </div>
 </div>
 
 <main id="inicio">
-  <section class="hero">
+  <section class="hero limpo">
     <div class="wrap hero-grid">
       <div>
-        <span class="chip" data-rv><i></i>Criativa Solutions · orçamentos internos</span>
-        <h1 data-rv style="--d:.08s">Proposta de comunicação visual com a <span class="destaque">margem certa</span>.</h1>
-        <p class="lead" data-rv style="--d:.16s">Do cliente ao PDF em um fluxo só: materiais e serviços dos fornecedores do Rio, perda e chapa inteira calculadas, margem por item ou meta do projeto e a proposta com a marca da Criativa.</p>
+        <span class="chip" data-rv><i></i>Criativa Solutions</span>
+        <h1 data-rv style="--d:.08s">Orçamentos com a <span class="destaque">margem certa</span>.</h1>
+        <p class="lead" data-rv style="--d:.16s">Do cliente ao PDF da proposta, numa ferramenta só.</p>
         <div class="acoes" data-rv style="--d:.24s">
-          <a class="btn btn-roxo" href="#app">Montar um orçamento <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a class="btn btn-linha" href="#fluxo">Ver como funciona</a>
-        </div>
-        <div class="provas" data-rv style="--d:.32s">
-          <div class="prova"><b class="num">+1000</b><span>projetos</span></div>
-          <div class="prova"><b class="num">+400</b><span>clientes</span></div>
-          <div class="prova"><b class="num">+20</b><span>estados atendidos</span></div>
+          <a class="btn btn-magenta" href="#app">Montar um orçamento <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-linha" href="#ferramenta">Ver por dentro</a>
         </div>
       </div>
 
@@ -500,91 +557,85 @@ html:not(.modo-app) #root { display: none; }
             <div class="sk" style="height:72px;border-radius:16px"></div>
           </div>
           <header>
-            <div><div class="rot">Proposta 0001 · r0 · exemplo</div><h3>Fachada em ACM com letra caixa iluminada</h3></div>
+            <div><div class="rot">Proposta 0001 · exemplo</div><h3>Fachada em ACM com letra caixa</h3></div>
             <span class="status">Rascunho</span>
           </header>
           <div class="linhas">
-            <div class="linha"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="6" width="18" height="10" rx="1"/><path d="M3 20h18"/></svg></span><div>Fachada em ACM<small>ACM, metalon, fixação e vedação</small></div><b class="num">R$ 9.870,00</b></div>
-            <div class="linha"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V6l5 8V6M14 6h6M17 6v12"/></svg></span><div>Letra caixa iluminada<small>Acrílico, módulos LED e fonte</small></div><b class="num">R$ 6.415,00</b></div>
-            <div class="linha"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 7l3-3 3 3-3 3M17 4v9a4 4 0 0 1-4 4H4"/></svg></span><div>Instalação<small>Equipe, deslocamento e andaime</small></div><b class="num">R$ 2.980,00</b></div>
+            <div class="linha"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="6" width="18" height="10" rx="1"/><path d="M3 20h18"/></svg></span><div>Fachada em ACM</div><b class="num">R$ 9.870,00</b></div>
+            <div class="linha"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V6l5 8V6M14 6h6M17 6v12"/></svg></span><div>Letra caixa iluminada</div><b class="num">R$ 6.415,00</b></div>
+            <div class="linha"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 7l3-3 3 3-3 3M17 4v9a4 4 0 0 1-4 4H4"/></svg></span><div>Instalação</div><b class="num">R$ 2.980,00</b></div>
           </div>
           <div class="total">
-            <div><small>Total da proposta</small><span class="v num">R$ 19.265,00</span></div>
+            <div><small>Total</small><span class="v num">R$ 19.265,00</span></div>
             <span class="margem num">margem 38,4%</span>
           </div>
         </article>
-        <aside class="flutua dica" data-px="-0.08">
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></span>
-          <div><b>Assistente</b>Ambiente externo com LED: use módulos e fonte com proteção IP65 ou superior.</div>
-        </aside>
         <aside class="flutua pdf" data-px="0.1">
           <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-          <div><b class="num">proposta-0001-r0.pdf</b><small>A4 pronto para enviar</small></div>
+          <div><b class="num">proposta-0001-r0.pdf</b></div>
         </aside>
       </div>
     </div>
   </section>
 
-  <div class="faixa" aria-hidden="true"><div class="faixa-trilho" id="faixa"><span>Fachada em ACM</span><span>Letra caixa</span><span>Placas</span><span>Adesivação</span><span>Sinalização</span><span>Displays</span><span>Banners</span><span>Fachada em ACM</span><span>Letra caixa</span><span>Placas</span></div></div>
+  <div class="faixa" aria-hidden="true"><div class="faixa-trilho" id="faixa"><span>Fachada em ACM</span><span>Letra caixa</span><span>Placas</span><span>Adesivação</span><span>Sinalização</span><span>Displays</span><span>Fachada em ACM</span><span>Letra caixa</span><span>Placas</span></div></div>
 
   <section class="vitrine" id="ferramenta" aria-label="A ferramenta por dentro">
     <div class="vitrine-palco">
       <div class="wrap vitrine-grid">
         <div>
-          <span class="olho">A ferramenta por dentro</span>
-          <h2>Do pedido ao PDF, numa tela só</h2>
+          <span class="olho">A ferramenta</span>
+          <h2>Do pedido ao PDF</h2>
           <ol class="etapas" id="etapas">
-            <li class="ativo"><b>Cliente e projeto</b><p>Contato, endereço de instalação, ambiente e medidas.</p></li>
-            <li><b>Materiais do catálogo</b><p>Ofertas dos fornecedores com fonte, unidade e preço ou “sob cotação”.</p></li>
-            <li><b>Chapa inteira</b><p>Área com perda e plano de corte lado a lado, com a sobra visível.</p></li>
-            <li><b>Margens</b><p>Margem geral, margem própria por linha e resultado em reais.</p></li>
-            <li><b>Proposta em PDF</b><p>A4 com a marca, entregáveis, condições e campo de aceite.</p></li>
+            <li class="ativo"><b>Cliente e projeto</b><p>Contato, local, ambiente e medidas.</p></li>
+            <li><b>Materiais do catálogo</b><p>Ofertas reais, com fonte e preço.</p></li>
+            <li><b>Chapa inteira</b><p>Área e plano de corte lado a lado.</p></li>
+            <li><b>Margens</b><p>Geral, por linha ou meta do projeto.</p></li>
+            <li><b>Proposta em PDF</b><p>A4 com a marca, pronta para enviar.</p></li>
           </ol>
         </div>
         <div class="janela" id="janela">
-          <div class="janela-top"><i></i><i></i><i></i><span>Criativa Solutions · Proposta 0001 · exemplo</span></div>
+          <div class="janela-top"><i></i><i></i><i></i><span>Criativa Solutions · exemplo</span></div>
           <div class="tela">
             <div class="cena ativa">
-              <h4>Cliente e projeto <em>Etapa 1 de 5</em></h4>
+              <h4>Cliente e projeto <em>1 de 5</em></h4>
               <div class="form-mini">
                 <div class="fm"><small>Cliente</small>Padaria Pão Dourado (exemplo)</div>
-                <div class="fm"><small>Contato</small>Marina · compras</div>
                 <div class="fm"><small>Ambiente</small><span class="pill-env"><span>Interno</span><span class="on">Externo</span></span></div>
                 <div class="fm"><small>Medidas</small><span class="num">6,00 × 1,20 m</span></div>
-                <div class="fm largo"><small>Instalação</small>Cachambi, Rio de Janeiro · fachada a 3,5 m de altura</div>
-                <div class="fm largo"><small>Escopo</small>Fachada em ACM com letra caixa iluminada, retirada do letreiro antigo e instalação.</div>
+                <div class="fm"><small>Instalação</small>Cachambi · 3,5 m de altura</div>
+                <div class="fm largo"><small>Escopo</small>Fachada em ACM com letra caixa iluminada e instalação.</div>
               </div>
             </div>
             <div class="cena">
-              <h4>Materiais e serviços <em>Etapa 2 de 5</em></h4>
+              <h4>Materiais e serviços <em>2 de 5</em></h4>
               <div class="tab-mini">
                 <div><span>Item</span><span>Fornecedor</span><b>Custo</b></div>
                 <div><span>ACM 3 mm</span><span class="forn-tag">ViaFlex BR</span><b class="pend">sob cotação</b></div>
-                <div><span>Acrílico leitoso</span><span class="forn-tag pri">Dacril · principal</span><b class="pend">sob cotação</b></div>
+                <div><span>Acrílico leitoso</span><span class="forn-tag pri">Dacril</span><b class="pend">sob cotação</b></div>
                 <div><span>Módulo LED 12 V</span><span class="forn-tag">Rio LED</span><b>R$ 2,09/un</b></div>
-                <div><span>Metalon</span><span class="forn-tag">Castilha</span><b class="pend">sob cotação</b></div>
-                <div><span>Instalação</span><span class="forn-tag">Equipe própria</span><b>R$ 1.900,00</b></div>
+                <div><span>Instalação</span><span class="forn-tag">Equipe</span><b>R$ 1.900,00</b></div>
               </div>
             </div>
             <div class="cena">
-              <h4>Chapa inteira <em>Etapa 3 de 5</em></h4>
+              <h4>Chapa inteira <em>3 de 5</em></h4>
               <div class="chapa-vis">
                 <div class="chapa"><div class="peca">peça 1,20 × 3,00</div><small>chapa 1,22 × 5,00</small></div>
                 <div class="chapa"><div class="peca">peça 1,20 × 3,00</div><small>chapa 1,22 × 5,00</small></div>
               </div>
-              <div class="metricas"><div>Área com perda<b>8,28 m²</b></div><div>Chapas pelo plano<b>2</b></div><div>Sobra<b>3,92 m²</b></div></div>
+              <div class="metricas"><div>Com perda<b>8,28 m²</b></div><div>Chapas<b>2</b></div><div>Sobra<b>3,92 m²</b></div></div>
             </div>
             <div class="cena">
-              <h4>Margens <em>Etapa 4 de 5</em></h4>
+              <h4>Margens <em>4 de 5</em></h4>
               <div class="barras-m">
                 <div class="bm"><span>Fachada em ACM</span><span class="tr"><i style="--w:40%"></i></span><b>40%</b></div>
-                <div class="bm own"><span>Letra caixa · própria</span><span class="tr"><i style="--w:42%"></i></span><b>42%</b></div>
+                <div class="bm own"><span>Letra caixa</span><span class="tr"><i style="--w:42%"></i></span><b>42%</b></div>
                 <div class="bm"><span>Instalação</span><span class="tr"><i style="--w:25.2%"></i></span><b>25,2%</b></div>
               </div>
-              <div class="resumo-m"><div>Custo<b>R$ 11.870,00</b></div><div>Venda<b>R$ 19.265,00</b></div><div>Margem efetiva<b>38,4%</b></div></div>
+              <div class="resumo-m"><div>Custo<b>R$ 11.870,00</b></div><div>Venda<b>R$ 19.265,00</b></div><div>Margem<b>38,4%</b></div></div>
             </div>
             <div class="cena">
-              <h4>Proposta em PDF <em>Etapa 5 de 5</em></h4>
+              <h4>Proposta em PDF <em>5 de 5</em></h4>
               <div class="a4">
                 <img src="./logos/criativa.png" alt="">
                 <div style="display:grid;gap:3px"><div class="lin" style="width:70%"></div><div class="lin" style="width:45%"></div></div>
@@ -601,93 +652,19 @@ html:not(.modo-app) #root { display: none; }
     </div>
   </section>
 
-  <section class="sec" id="recursos" style="padding-top:48px">
-    <div class="wrap">
-      <div class="cab">
-        <div data-rv><span class="olho">O que muda no dia a dia</span><h2>Menos planilha, mais proposta aprovada</h2></div>
-        <p data-rv="dir" style="--d:.12s">Cada número da proposta sai da mesma conta: o que aparece na tela é o que vai no PDF e o que fica na revisão interna.</p>
-      </div>
-      <div class="bento">
-        <article class="cel c1" data-rv style="--d:0.00s">
-          <span class="tag">Margem por item ou meta</span>
-          <div>
-            <h3>Margem sobre a venda, sem surpresa no fechamento</h3>
-            <p style="margin-top:12px">Defina a margem geral, ajuste linhas específicas ou peça a meta do projeto. O app distribui o preço e mostra a margem efetiva depois do desconto e das taxas.</p>
-          </div>
-          <div class="mini-tab num">
-            <div><span>Custo total</span><b>R$ 11.870,00</b></div>
-            <div><span>Desconto 5%</span><b>− R$ 963,25</b></div>
-            <div class="forte"><span>Margem efetiva</span><b>35,1%</b></div>
-          </div>
-        </article>
-        <article class="cel c2" data-rv style="--d:0.08s">
-          <span class="tag">Chapas e rolos</span>
-          <div>
-            <h3>Área, perda e chapa inteira lado a lado</h3>
-            <p style="margin-top:12px">Informe as peças e o formato da chapa. O app compara a estimativa por área com o plano de corte e deixa você cobrar o rateio ou a compra inteira.</p>
-          </div>
-          <div class="selos num"><span>8,28 m² com perda</span><span>2 chapas pelo plano</span><span>sobra 3,92 m²</span></div>
-        </article>
-        <article class="cel c3" data-rv style="--d:0.16s">
-          <span class="tag">Assistente</span>
-          <div><h3>Dicas enquanto você monta</h3><p style="margin-top:10px">LED sem fonte, peça externa sem vedação, custo pendente, desconto que derruba a margem.</p></div>
-        </article>
-        <article class="cel c4" data-rv style="--d:0.00s">
-          <span class="tag">Emissão</span>
-          <div><h3>Proposta emitida não muda</h3><p style="margin-top:10px">Custos, margens e condições ficam congelados. Mudou o preço no catálogo? Só muda o rascunho que você atualizar.</p></div>
-        </article>
-        <article class="cel c5" data-rv style="--d:0.08s">
-          <span class="tag">Fornecedores</span>
-          <div><h3>Contato em um toque</h3><p style="margin-top:10px">WhatsApp, ligação, e-mail, site e rota direto do cartão e do orçamento aberto.</p></div>
-        </article>
-      </div>
+  <section class="sec" id="recursos">
+    <div class="wrap tres">
+      <article class="cel t-mag" data-rv><h3>Margem sobre a venda</h3><p>O preço sai do custo e da margem, linha a linha.</p></article>
+      <article class="cel t-roxo" data-rv style="--d:.08s"><h3>Chapa inteira</h3><p>Área, plano de corte e sobra antes de comprar.</p></article>
+      <article class="cel t-tinta" data-rv style="--d:.16s"><h3>Proposta congelada</h3><p>Emitiu, não muda. Alteração só por revisão.</p></article>
     </div>
   </section>
 
-  <section class="sec" id="modelos" style="padding-top:0">
-    <div class="wrap">
-      <div class="cab">
-        <div data-rv><span class="olho">Modelos editáveis</span><h2>Comece pelo tipo de projeto</h2></div>
-        <p data-rv="dir" style="--d:.12s">Cada modelo traz os entregáveis e as famílias de materiais e serviços. Você ajusta medidas, custos e margens.</p>
-      </div>
-      <div class="modelos">
-        <article class="modelo dest" data-rv style="--d:0.00s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="11" rx="1"/><path d="M3 20h18M7 16v4M17 16v4"/></svg></span><h3>Fachada em ACM</h3><p>Chapas, estrutura, fixação, vedação e instalação.</p><div class="mats"><span>ACM</span><span>metalon</span><span>fita VHB</span><span>selante</span></div></article>
-        <article class="modelo" data-rv style="--d:0.07s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V6l5 8V6M14 6h6M17 6v12"/></svg></span><h3>Letra caixa iluminada</h3><p>Corpo, face em acrílico, LED e fonte compatível.</p><div class="mats"><span>acrílico</span><span>módulo LED</span><span>fonte</span></div></article>
-        <article class="modelo" data-rv style="--d:0.14s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="8" cy="9" r="1"/><circle cx="16" cy="9" r="1"/></svg></span><h3>Placa de acrílico</h3><p>Corte, impressão UV ou adesivo e espaçadores.</p><div class="mats"><span>acrílico</span><span>impressão UV</span><span>espaçador</span></div></article>
-        <article class="modelo" data-rv style="--d:0.21s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 12h18M12 4v16"/></svg></span><h3>Adesivação de vitrine</h3><p>Vinil impresso, perfurado ou jateado e aplicação.</p><div class="mats"><span>vinil</span><span>laminado</span><span>aplicação</span></div></article>
-        <article class="modelo" data-rv style="--d:0.00s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 4h14v12H5zM9 16v4M15 16v4"/></svg></span><h3>Banner</h3><p>Lona frontlight, ilhós ou bastão e acabamento.</p><div class="mats"><span>lona</span><span>ilhós</span><span>bastão</span></div></article>
-        <article class="modelo" data-rv style="--d:0.07s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h12l-3-3M16 12l-3 3M20 5v14"/></svg></span><h3>Sinalização interna</h3><p>Placas indicativas em PS ou acrílico e fixação.</p><div class="mats"><span>PS</span><span>acrílico</span><span>vinil</span></div></article>
-        <article class="modelo" data-rv style="--d:0.14s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20l3-14h6l3 14M8 13h8"/></svg></span><h3>Display</h3><p>Acrílico ou PVC, impressão, dobra e montagem.</p><div class="mats"><span>acrílico</span><span>PVC</span><span>dobra</span></div></article>
-        <article class="modelo" data-rv style="--d:0.21s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span><h3>Itens avulsos</h3><p>Qualquer material ou serviço fora dos modelos.</p><div class="mats"><span>catálogo</span><span>avulso</span></div></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec" id="fluxo" style="padding-top:0">
-    <div class="wrap">
-      <div class="fluxo">
-        <div class="cab" style="margin-bottom:0">
-        <div data-rv><span class="olho">Como funciona</span><h2>Seis etapas até o PDF</h2></div>
-          <p data-rv="dir" style="--d:.12s">Salve rascunhos incompletos quando quiser. Para emitir, todo item precisa de custo ou de custo zero confirmado.</p>
-        </div>
-        <ol class="passos">
-          <li data-rv style="--d:0.00s"><b>Cliente</b><span>Contato, endereço de instalação e fotos.</span></li>
-          <li data-rv style="--d:0.06s"><b>Projeto</b><span>Medidas, ambiente e escopo.</span></li>
-          <li data-rv style="--d:0.12s"><b>Materiais e serviços</b><span>Catálogo, modelo ou avulso.</span></li>
-          <li data-rv style="--d:0.18s"><b>Margens</b><span>Geral, por item ou meta.</span></li>
-          <li data-rv style="--d:0.24s"><b>Revisão</b><span>Custo, preço, desconto e resultado.</span></li>
-          <li data-rv style="--d:0.30s"><b>PDF</b><span>A4 com a marca, pronto para enviar.</span></li>
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec" id="calculadora" style="padding-top:0">
-    <div class="wrap calc">
-      <div class="calc-in" data-rv="esq">
-        <span class="olho">Calculadora de margem</span>
-        <h2>Preço pela margem sobre a venda</h2>
-        <p>Margem é (venda − custo) ÷ venda, então o preço é custo ÷ (1 − margem). O app usa essa conta em cada linha e no PDF.</p>
+  <section class="sec" id="calculadora">
+    <div class="wrap calc-limpa" data-rv>
+      <div>
+        <span class="olho">Calculadora</span>
+        <h2>Quanto cobrar?</h2>
         <div class="campos">
           <div class="campo"><label for="custo">Custo</label><div class="in"><span>R$</span><input id="custo" inputmode="decimal" value="100,00" autocomplete="off"></div></div>
           <div class="campo"><label for="margem">Margem</label><div class="in"><input id="margem" inputmode="decimal" value="40" autocomplete="off"><span>%</span></div></div>
@@ -695,58 +672,47 @@ html:not(.modo-app) #root { display: none; }
         <div class="trilho"><input id="faixa-m" type="range" min="0" max="80" step="1" value="40" aria-label="Ajustar margem"></div>
         <div class="erro" id="erro" role="status"></div>
       </div>
-      <div class="calc-out" data-rv="dir" style="--d:.1s" aria-live="polite">
-        <div><div class="rot">Preço de venda</div><div class="preco num" id="preco">R$ 166,67</div></div>
-        <dl class="num">
-          <dt>Resultado</dt><dd id="lucro">R$ 66,67</dd>
-          <dt>Markup equivalente</dt><dd id="markup">66,67%</dd>
-        </dl>
-        <p class="nota">Markup é outra conta: custo × (1 + markup). Por isso 40% de margem equivale a 66,67% de markup.</p>
+      <div class="calc-res" aria-live="polite">
+        <div class="rot">Preço de venda</div>
+        <div class="preco num" id="preco">R$ 166,67</div>
+        <p class="num">Resultado <b id="lucro">R$ 66,67</b> · markup <b id="markup">66,67%</b></p>
       </div>
     </div>
   </section>
 
-  <section class="sec" id="fornecedores" style="padding-top:0">
+  <section class="sec" id="fornecedores">
     <div class="wrap">
-      <div class="cab">
-        <div data-rv><span class="olho">Catálogo inicial</span><h2>Fornecedores do corredor da Avenida Brasil</h2></div>
-        <p data-rv="dir" style="--d:.12s">Contatos conferidos nas páginas oficiais, com fonte e data da consulta. O que ainda não foi confirmado aparece sinalizado no app.</p>
-      </div>
-      <div class="forns">
-        <div class="forn principal" data-rv style="--d:0.00s"><span class="lg ini">DM</span><div><b>Dacril Multicor</b><small>Cordovil</small><span class="selo">Principal em acrílico</span></div></div>
-        <div class="forn" data-rv style="--d:0.06s"><span class="lg"><img src="./logos/universal.png" alt=""></span><div><b>Universal Acrílicos</b><small>Penha</small></div></div>
-        <div class="forn" data-rv style="--d:0.12s"><span class="lg escuro"><img src="./logos/viaflex.png" alt=""></span><div><b>ViaFlex BR</b><small>Ramos</small></div></div>
-        <div class="forn" data-rv style="--d:0.18s"><span class="lg"><img src="./logos/harto.png" alt=""></span><div><b>Harto</b><small>Inhaúma</small></div></div>
-        <div class="forn" data-rv style="--d:0.00s"><span class="lg"><img src="./logos/sinaliza.png" alt=""></span><div><b>Sinaliza Placas</b><small>Del Castilho</small></div></div>
-        <div class="forn" data-rv style="--d:0.06s"><span class="lg ini">VM</span><div><b>Vivametal</b><small>Ramos</small></div></div>
-        <div class="forn" data-rv style="--d:0.12s"><span class="lg ini">CL</span><div><b>Casa das Letras</b><small>Cachambi</small></div></div>
-        <div class="forn" data-rv style="--d:0.18s"><span class="lg ini">MC</span><div><b>Mundo das Cores</b><small>Tijuca</small></div></div>
+      <div class="centro" data-rv><span class="olho">Fornecedores</span><h2>Do corredor da Avenida Brasil</h2></div>
+      <div class="logos" data-rv style="--d:.1s">
+        <span class="lg-i principal" title="Dacril Multicor · principal em acrílico">DM</span>
+        <img src="./logos/universal.png" alt="Universal Acrílicos">
+        <span class="lg-escuro"><img src="./logos/viaflex.png" alt="ViaFlex BR"></span>
+        <img src="./logos/harto.png" alt="Acrílico Harto">
+        <img src="./logos/sinaliza.png" alt="Sinaliza Placas">
+        <span class="lg-i" title="Vivametal">VM</span>
+        <span class="lg-i" title="Casa das Letras">CL</span>
+        <span class="lg-i" title="Mundo das Cores">MC</span>
       </div>
     </div>
   </section>
 
-  <section class="sec" id="app" style="padding-top:0">
+  <section class="sec" id="app">
     <div class="wrap">
-      <div class="cta" data-rv="zoom">
-        <div>
-          <h2>Pronto para a <span>próxima proposta</span>?</h2>
-          <p>Cliente, projeto, materiais, margens, revisão e PDF. Tudo no mesmo lugar, com a marca da Criativa.</p>
-        </div>
-        <a class="btn btn-magenta" href="#app">Abrir o app <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <div class="cta cta-mag" data-rv="zoom">
+        <h2>Pronto para a próxima proposta?</h2>
+        <a class="btn btn-branco" href="#app">Abrir o app <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap">
-    <div class="rodape" data-rv>
-      <div><img src="./logos/criativa.png" alt="Criativa"><p>Criativa Solutions é o app interno de orçamentos da Criativa Grupo.</p></div>
-      <div><b>Endereço</b><address>Rua Guilhermina, 432<br>Rio de Janeiro, RJ · 20756-060</address></div>
-      <div><b>Contato</b><address><span>(21) 96490-3804</span><span>contato@criativagrupo.com.br</span><a href="https://www.instagram.com/criativagrupo.oficial" target="_blank" rel="noopener">@criativagrupo.oficial</a></address></div>
-    </div>
+  <div class="wrap rodape-limpo">
+    <img src="./logos/criativa.png" alt="Criativa">
+    <span>Rua Guilhermina, 432 · Rio de Janeiro, RJ · (21) 96490-3804 · contato@criativagrupo.com.br</span>
   </div>
 </footer>
+
 
 </div>
 <div id="root"></div>
